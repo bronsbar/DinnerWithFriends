@@ -7,23 +7,58 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CC7729B520131E1800BDBD13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729B420131E1800BDBD13 /* AppDelegate.swift */; };
-		CC7729B720131E1800BDBD13 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729B620131E1800BDBD13 /* ViewController.swift */; };
-		CC7729BA20131E1800BDBD13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC7729B820131E1800BDBD13 /* Main.storyboard */; };
 		CC7729BD20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC7729BB20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld */; };
 		CC7729BF20131E1800BDBD13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC7729BE20131E1800BDBD13 /* Assets.xcassets */; };
 		CC7729C220131E1800BDBD13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC7729C020131E1800BDBD13 /* LaunchScreen.storyboard */; };
+		CC7729CC20131E4100BDBD13 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC7729CB20131E4100BDBD13 /* CloudKit.framework */; };
+		CC7729CE201325D400BDBD13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC7729CD201325D300BDBD13 /* Main.storyboard */; };
+		CC7729D4201491E400BDBD13 /* DinnerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729CF201491E400BDBD13 /* DinnerCollectionViewCell.swift */; };
+		CC7729D5201491E400BDBD13 /* MenuBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729D0201491E400BDBD13 /* MenuBarCollectionViewCell.swift */; };
+		CC7729D6201491E400BDBD13 /* DinnerItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729D1201491E400BDBD13 /* DinnerItemCollectionViewCell.swift */; };
+		CC7729D7201491E400BDBD13 /* CreateDinnerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729D2201491E400BDBD13 /* CreateDinnerCollectionView.swift */; };
+		CC7729D8201491E400BDBD13 /* DinnerCreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729D3201491E400BDBD13 /* DinnerCreatorViewController.swift */; };
+		CC7729DA2014920800BDBD13 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729D92014920800BDBD13 /* CoreDataStack.swift */; };
+		CC7729DF2014922200BDBD13 /* DinnerItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729DB2014922200BDBD13 /* DinnerItemTableViewCell.swift */; };
+		CC7729E02014922200BDBD13 /* DinnerItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729DC2014922200BDBD13 /* DinnerItemTableViewController.swift */; };
+		CC7729E12014922200BDBD13 /* DinnerDetailCategoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729DD2014922200BDBD13 /* DinnerDetailCategoryCollectionView.swift */; };
+		CC7729E22014922200BDBD13 /* DinnerItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729DE2014922200BDBD13 /* DinnerItemDetailViewController.swift */; };
+		CC7729E4201492A300BDBD13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729E3201492A300BDBD13 /* AppDelegate.swift */; };
+		CC7729EB2014966500BDBD13 /* BackgroundPictures+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729E52014966500BDBD13 /* BackgroundPictures+CoreDataClass.swift */; };
+		CC7729EC2014966500BDBD13 /* BackgroundPictures+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729E62014966500BDBD13 /* BackgroundPictures+CoreDataProperties.swift */; };
+		CC7729ED2014966500BDBD13 /* DinnerItems+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729E72014966500BDBD13 /* DinnerItems+CoreDataClass.swift */; };
+		CC7729EE2014966500BDBD13 /* DinnerItems+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729E82014966500BDBD13 /* DinnerItems+CoreDataProperties.swift */; };
+		CC7729EF2014966500BDBD13 /* Dinners+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729E92014966500BDBD13 /* Dinners+CoreDataClass.swift */; };
+		CC7729F02014966500BDBD13 /* Dinners+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729EA2014966500BDBD13 /* Dinners+CoreDataProperties.swift */; };
+		CC7729F52014989600BDBD13 /* DinnerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729F42014989600BDBD13 /* DinnerItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CC7729B120131E1800BDBD13 /* DinnerWithFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DinnerWithFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CC7729B420131E1800BDBD13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CC7729B620131E1800BDBD13 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CC7729B920131E1800BDBD13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CC7729BC20131E1800BDBD13 /* DinnerWithFriends.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DinnerWithFriends.xcdatamodel; sourceTree = "<group>"; };
 		CC7729BE20131E1800BDBD13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC7729C120131E1800BDBD13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC7729C320131E1800BDBD13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC7729C920131E1D00BDBD13 /* DinnerWithFriends.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DinnerWithFriends.entitlements; sourceTree = "<group>"; };
+		CC7729CB20131E4100BDBD13 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		CC7729CD201325D300BDBD13 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		CC7729CF201491E400BDBD13 /* DinnerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerCollectionViewCell.swift; sourceTree = "<group>"; };
+		CC7729D0201491E400BDBD13 /* MenuBarCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBarCollectionViewCell.swift; sourceTree = "<group>"; };
+		CC7729D1201491E400BDBD13 /* DinnerItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		CC7729D2201491E400BDBD13 /* CreateDinnerCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateDinnerCollectionView.swift; sourceTree = "<group>"; };
+		CC7729D3201491E400BDBD13 /* DinnerCreatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerCreatorViewController.swift; sourceTree = "<group>"; };
+		CC7729D92014920800BDBD13 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		CC7729DB2014922200BDBD13 /* DinnerItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerItemTableViewCell.swift; sourceTree = "<group>"; };
+		CC7729DC2014922200BDBD13 /* DinnerItemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerItemTableViewController.swift; sourceTree = "<group>"; };
+		CC7729DD2014922200BDBD13 /* DinnerDetailCategoryCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerDetailCategoryCollectionView.swift; sourceTree = "<group>"; };
+		CC7729DE2014922200BDBD13 /* DinnerItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerItemDetailViewController.swift; sourceTree = "<group>"; };
+		CC7729E3201492A300BDBD13 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CC7729E52014966500BDBD13 /* BackgroundPictures+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackgroundPictures+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CC7729E62014966500BDBD13 /* BackgroundPictures+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackgroundPictures+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CC7729E72014966500BDBD13 /* DinnerItems+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DinnerItems+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CC7729E82014966500BDBD13 /* DinnerItems+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DinnerItems+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CC7729E92014966500BDBD13 /* Dinners+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dinners+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CC7729EA2014966500BDBD13 /* Dinners+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dinners+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CC7729F42014989600BDBD13 /* DinnerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC7729CC20131E4100BDBD13 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,8 +76,12 @@
 		CC7729A820131E1800BDBD13 = {
 			isa = PBXGroup;
 			children = (
+				CC7729F12014969D00BDBD13 /* CoreData */,
+				CC7729F22014972100BDBD13 /* ViewCells and Views */,
+				CC7729F32014977700BDBD13 /* ViewControllers */,
 				CC7729B320131E1800BDBD13 /* DinnerWithFriends */,
 				CC7729B220131E1800BDBD13 /* Products */,
+				CC7729CA20131E4100BDBD13 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +96,61 @@
 		CC7729B320131E1800BDBD13 /* DinnerWithFriends */ = {
 			isa = PBXGroup;
 			children = (
-				CC7729B420131E1800BDBD13 /* AppDelegate.swift */,
-				CC7729B620131E1800BDBD13 /* ViewController.swift */,
-				CC7729B820131E1800BDBD13 /* Main.storyboard */,
+				CC7729F42014989600BDBD13 /* DinnerItem.swift */,
+				CC7729C920131E1D00BDBD13 /* DinnerWithFriends.entitlements */,
+				CC7729E3201492A300BDBD13 /* AppDelegate.swift */,
+				CC7729CD201325D300BDBD13 /* Main.storyboard */,
 				CC7729BE20131E1800BDBD13 /* Assets.xcassets */,
 				CC7729C020131E1800BDBD13 /* LaunchScreen.storyboard */,
 				CC7729C320131E1800BDBD13 /* Info.plist */,
-				CC7729BB20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld */,
 			);
 			path = DinnerWithFriends;
+			sourceTree = "<group>";
+		};
+		CC7729CA20131E4100BDBD13 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CC7729CB20131E4100BDBD13 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CC7729F12014969D00BDBD13 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				CC7729E82014966500BDBD13 /* DinnerItems+CoreDataProperties.swift */,
+				CC7729E72014966500BDBD13 /* DinnerItems+CoreDataClass.swift */,
+				CC7729E92014966500BDBD13 /* Dinners+CoreDataClass.swift */,
+				CC7729EA2014966500BDBD13 /* Dinners+CoreDataProperties.swift */,
+				CC7729E52014966500BDBD13 /* BackgroundPictures+CoreDataClass.swift */,
+				CC7729E62014966500BDBD13 /* BackgroundPictures+CoreDataProperties.swift */,
+				CC7729D92014920800BDBD13 /* CoreDataStack.swift */,
+				CC7729BB20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		CC7729F22014972100BDBD13 /* ViewCells and Views */ = {
+			isa = PBXGroup;
+			children = (
+				CC7729D2201491E400BDBD13 /* CreateDinnerCollectionView.swift */,
+				CC7729DB2014922200BDBD13 /* DinnerItemTableViewCell.swift */,
+				CC7729CF201491E400BDBD13 /* DinnerCollectionViewCell.swift */,
+				CC7729D1201491E400BDBD13 /* DinnerItemCollectionViewCell.swift */,
+				CC7729D0201491E400BDBD13 /* MenuBarCollectionViewCell.swift */,
+				CC7729DD2014922200BDBD13 /* DinnerDetailCategoryCollectionView.swift */,
+			);
+			path = "ViewCells and Views";
+			sourceTree = "<group>";
+		};
+		CC7729F32014977700BDBD13 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CC7729DE2014922200BDBD13 /* DinnerItemDetailViewController.swift */,
+				CC7729DC2014922200BDBD13 /* DinnerItemTableViewController.swift */,
+				CC7729D3201491E400BDBD13 /* DinnerCreatorViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -100,6 +186,17 @@
 					CC7729B020131E1800BDBD13 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -128,7 +225,7 @@
 			files = (
 				CC7729C220131E1800BDBD13 /* LaunchScreen.storyboard in Resources */,
 				CC7729BF20131E1800BDBD13 /* Assets.xcassets in Resources */,
-				CC7729BA20131E1800BDBD13 /* Main.storyboard in Resources */,
+				CC7729CE201325D400BDBD13 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,23 +236,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC7729B720131E1800BDBD13 /* ViewController.swift in Sources */,
+				CC7729E4201492A300BDBD13 /* AppDelegate.swift in Sources */,
+				CC7729E22014922200BDBD13 /* DinnerItemDetailViewController.swift in Sources */,
 				CC7729BD20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld in Sources */,
-				CC7729B520131E1800BDBD13 /* AppDelegate.swift in Sources */,
+				CC7729E12014922200BDBD13 /* DinnerDetailCategoryCollectionView.swift in Sources */,
+				CC7729F52014989600BDBD13 /* DinnerItem.swift in Sources */,
+				CC7729F02014966500BDBD13 /* Dinners+CoreDataProperties.swift in Sources */,
+				CC7729D6201491E400BDBD13 /* DinnerItemCollectionViewCell.swift in Sources */,
+				CC7729ED2014966500BDBD13 /* DinnerItems+CoreDataClass.swift in Sources */,
+				CC7729D8201491E400BDBD13 /* DinnerCreatorViewController.swift in Sources */,
+				CC7729D7201491E400BDBD13 /* CreateDinnerCollectionView.swift in Sources */,
+				CC7729EB2014966500BDBD13 /* BackgroundPictures+CoreDataClass.swift in Sources */,
+				CC7729DF2014922200BDBD13 /* DinnerItemTableViewCell.swift in Sources */,
+				CC7729E02014922200BDBD13 /* DinnerItemTableViewController.swift in Sources */,
+				CC7729D4201491E400BDBD13 /* DinnerCollectionViewCell.swift in Sources */,
+				CC7729EE2014966500BDBD13 /* DinnerItems+CoreDataProperties.swift in Sources */,
+				CC7729D5201491E400BDBD13 /* MenuBarCollectionViewCell.swift in Sources */,
+				CC7729EF2014966500BDBD13 /* Dinners+CoreDataClass.swift in Sources */,
+				CC7729EC2014966500BDBD13 /* BackgroundPictures+CoreDataProperties.swift in Sources */,
+				CC7729DA2014920800BDBD13 /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CC7729B820131E1800BDBD13 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CC7729B920131E1800BDBD13 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CC7729C020131E1800BDBD13 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -278,6 +383,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DinnerWithFriends/DinnerWithFriends.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C26YUS4LJ8;
 				INFOPLIST_FILE = DinnerWithFriends/Info.plist;
@@ -293,6 +399,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DinnerWithFriends/DinnerWithFriends.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C26YUS4LJ8;
 				INFOPLIST_FILE = DinnerWithFriends/Info.plist;

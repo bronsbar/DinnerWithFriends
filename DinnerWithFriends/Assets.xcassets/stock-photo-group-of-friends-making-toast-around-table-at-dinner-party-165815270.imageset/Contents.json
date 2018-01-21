@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "stock-photo-group-of-friends-making-toast-around-table-at-dinner-party-165815270.jpg",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "stock-photo-group-of-friends-making-toast-around-table-at-dinner-party-165815271.jpg",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "stock-photo-group-of-friends-making-toast-around-table-at-dinner-party-165815272.jpg",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
