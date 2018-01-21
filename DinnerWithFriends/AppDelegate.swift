@@ -116,7 +116,7 @@ extension AppDelegate {
     
     
     private func configureCloudKit() {
-        let container = CKContainer(identifier: "iCloud.bart.bronselaer-me.com.DinnerWithFriends5-0")
+        let container = CKContainer(identifier: "iCloud.bart.bronselaer-me.com.DinnerWithFriends")
         container.privateCloudDatabase.fetchAllRecordZones { zones, error in
             guard let zones = zones, error == nil else {
                 
@@ -132,10 +132,10 @@ extension AppDelegate {
     
     private func importCloudKitImages() {
         let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: "DinnerPicture", predicate: predicate)
+        let query = CKQuery(recordType: "BackgroundPicture", predicate: predicate)
         let operation = CKQueryOperation(query: query)
         operation.recordFetchedBlock = { record in
-            if let asset = record.object(forKey: "picture") as? CKAsset,
+            if let asset = record.object(forKey: "image") as? CKAsset,
                 let data = NSData(contentsOf: asset.fileURL),
                 let image = UIImage(data: data as Data) {
                 self.dinnerPictures.append(image)
