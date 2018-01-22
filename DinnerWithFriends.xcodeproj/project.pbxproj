@@ -30,6 +30,8 @@
 		CC7729EF2014966500BDBD13 /* Dinners+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729E92014966500BDBD13 /* Dinners+CoreDataClass.swift */; };
 		CC7729F02014966500BDBD13 /* Dinners+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729EA2014966500BDBD13 /* Dinners+CoreDataProperties.swift */; };
 		CC7729F52014989600BDBD13 /* DinnerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729F42014989600BDBD13 /* DinnerItem.swift */; };
+		CC7729F720162DF400BDBD13 /* FetchAllRecordZonesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729F620162DF400BDBD13 /* FetchAllRecordZonesOperation.swift */; };
+		CC7729FA20162E4900BDBD13 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729F920162E4900BDBD13 /* Enum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,8 @@
 		CC7729E92014966500BDBD13 /* Dinners+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dinners+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CC7729EA2014966500BDBD13 /* Dinners+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dinners+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CC7729F42014989600BDBD13 /* DinnerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerItem.swift; sourceTree = "<group>"; };
+		CC7729F620162DF400BDBD13 /* FetchAllRecordZonesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllRecordZonesOperation.swift; sourceTree = "<group>"; };
+		CC7729F920162E4900BDBD13 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,9 +80,11 @@
 		CC7729A820131E1800BDBD13 = {
 			isa = PBXGroup;
 			children = (
+				CC7729FB20162F9B00BDBD13 /* Enums */,
 				CC7729F12014969D00BDBD13 /* CoreData */,
 				CC7729F22014972100BDBD13 /* ViewCells and Views */,
 				CC7729F32014977700BDBD13 /* ViewControllers */,
+				CC7729F820162E2600BDBD13 /* Operations */,
 				CC7729B320131E1800BDBD13 /* DinnerWithFriends */,
 				CC7729B220131E1800BDBD13 /* Products */,
 				CC7729CA20131E4100BDBD13 /* Frameworks */,
@@ -151,6 +157,22 @@
 				CC7729D3201491E400BDBD13 /* DinnerCreatorViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CC7729F820162E2600BDBD13 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				CC7729F620162DF400BDBD13 /* FetchAllRecordZonesOperation.swift */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
+		CC7729FB20162F9B00BDBD13 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				CC7729F920162E4900BDBD13 /* Enum.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,9 +265,11 @@
 				CC7729F52014989600BDBD13 /* DinnerItem.swift in Sources */,
 				CC7729F02014966500BDBD13 /* Dinners+CoreDataProperties.swift in Sources */,
 				CC7729D6201491E400BDBD13 /* DinnerItemCollectionViewCell.swift in Sources */,
+				CC7729F720162DF400BDBD13 /* FetchAllRecordZonesOperation.swift in Sources */,
 				CC7729ED2014966500BDBD13 /* DinnerItems+CoreDataClass.swift in Sources */,
 				CC7729D8201491E400BDBD13 /* DinnerCreatorViewController.swift in Sources */,
 				CC7729D7201491E400BDBD13 /* CreateDinnerCollectionView.swift in Sources */,
+				CC7729FA20162E4900BDBD13 /* Enum.swift in Sources */,
 				CC7729EB2014966500BDBD13 /* BackgroundPictures+CoreDataClass.swift in Sources */,
 				CC7729DF2014922200BDBD13 /* DinnerItemTableViewCell.swift in Sources */,
 				CC7729E02014922200BDBD13 /* DinnerItemTableViewController.swift in Sources */,

@@ -48,7 +48,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         viewController.coreDataStack = coreDataStack
         viewController2.coreDataStack = coreDataStack
         
-        configureCloudKit()
+        let operation = OperationQueue()
+        let fetchAllRecordZonesOperation = FetchAllRecordZonesOperation.fetchAllRecordZonesOperation()
+        fetchAllRecordZonesOperation.database = container.privateCloudDatabase
+        operation.addOperation(fetchAllRecordZonesOperation)
+        
+        
+//        configureCloudKit()
         // if Core Data is empty, import the dinnerItems from Cloudkit
         importCloudKitDataIfNeeded(toUpdate: viewController)
         importCloudKitImages()
