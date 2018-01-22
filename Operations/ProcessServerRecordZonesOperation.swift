@@ -42,6 +42,14 @@ class ProcessServerRecordZonesOperation: Operation {
         }
     }
     private func setZonesToDelete() {
-        
+        // it is important to not inadvertently delete the default zone
+        for recordZoneID in preProcessRecordZoneIDs {
+            if (recordZoneID.zoneName != CKRecordZoneDefaultName) && (CloudKitZone(rawValue: recordZoneID.zoneName) == nil) {
+                if postProcessRecordZonesToDelete == nil {
+                    postProcessRecordZonesToDelete = []
+                }
+                postProcessRecordZonesToDelete?.append(recordZoneID)
+            }
+        }
     }
 }
