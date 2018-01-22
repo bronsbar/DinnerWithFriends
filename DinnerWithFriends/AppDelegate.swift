@@ -30,16 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
       
         // propagate the managedContext
         
-        guard let tabBarController = window?.rootViewController as? UITabBarController else { print ("tabbarcontroller niet gevonden")
+        guard let tabBarController = window?.rootViewController as? UITabBarController, let navController = tabBarController.childViewControllers.first as? UINavigationController, let viewController = navController.topViewController as? DinnerItemTableViewController else { print ("managedcontext not propagated")
             return true
         }
-        guard let navController = tabBarController.childViewControllers.first as? UINavigationController else {
-            print ("navcontroller niet gevonden")
-            return true
-        }
-        guard let viewController = navController.topViewController as? DinnerItemTableViewController else {
-            print ("managedcontext not propagated")
-            return true}
+        
         
         guard let navController2 = tabBarController.childViewControllers[1] as? UINavigationController else {
             print("tweede navcontroller niet gevonden")
