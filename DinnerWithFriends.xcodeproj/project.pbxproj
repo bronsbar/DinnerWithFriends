@@ -32,6 +32,7 @@
 		CC7729F52014989600BDBD13 /* DinnerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729F42014989600BDBD13 /* DinnerItem.swift */; };
 		CC7729F720162DF400BDBD13 /* FetchAllRecordZonesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729F620162DF400BDBD13 /* FetchAllRecordZonesOperation.swift */; };
 		CC7729FA20162E4900BDBD13 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729F920162E4900BDBD13 /* Enum.swift */; };
+		CC7729FD20164E2200BDBD13 /* ProcessServerRecordZonesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729FC20164E2200BDBD13 /* ProcessServerRecordZonesOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		CC7729F42014989600BDBD13 /* DinnerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerItem.swift; sourceTree = "<group>"; };
 		CC7729F620162DF400BDBD13 /* FetchAllRecordZonesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllRecordZonesOperation.swift; sourceTree = "<group>"; };
 		CC7729F920162E4900BDBD13 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		CC7729FC20164E2200BDBD13 /* ProcessServerRecordZonesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessServerRecordZonesOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				CC7729F620162DF400BDBD13 /* FetchAllRecordZonesOperation.swift */,
+				CC7729FC20164E2200BDBD13 /* ProcessServerRecordZonesOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				CC7729BD20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld in Sources */,
 				CC7729E12014922200BDBD13 /* DinnerDetailCategoryCollectionView.swift in Sources */,
 				CC7729F52014989600BDBD13 /* DinnerItem.swift in Sources */,
+				CC7729FD20164E2200BDBD13 /* ProcessServerRecordZonesOperation.swift in Sources */,
 				CC7729F02014966500BDBD13 /* Dinners+CoreDataProperties.swift in Sources */,
 				CC7729D6201491E400BDBD13 /* DinnerItemCollectionViewCell.swift in Sources */,
 				CC7729F720162DF400BDBD13 /* FetchAllRecordZonesOperation.swift in Sources */,

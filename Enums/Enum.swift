@@ -7,7 +7,14 @@
 //
 
 import Foundation
+import CloudKit
 
 enum CloudKitZone: String {
     case dinnerItemsZone = "dinnerItemsZone"
+    
+    static let allCloudKitZoneNames = [CloudKitZone.dinnerItemsZone.rawValue]
+    
+    func recordZoneID() -> CKRecordZoneID {
+        return CKRecordZoneID(zoneName: self.rawValue)
+    }
 }

@@ -19,7 +19,7 @@ class FetchAllRecordZonesOperation: CKFetchRecordZonesOperation {
     }
     
     func setBlock() {
-        self.fetchRecordZonesCompletionBlock = {
+        self.fetchRecordZonesCompletionBlock = { [unowned self]
             (recordZones, error) in
             print("FetchAllRecordZonesOperation.fetchRecordCompletionBlock")
             if let error = error {
