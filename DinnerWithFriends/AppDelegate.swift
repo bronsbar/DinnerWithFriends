@@ -17,14 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
     
-    var container: CKContainer = {
-       return CKContainer(identifier: "iCloud.bart.bronselaer-me.com.DinnerWithFriends")
-    }()
-    
 
     lazy var coreDataStack = CoreDataStack(modelName: "DinnerWithFriends")
     
     var dinnerPictures :[UIImage] = []
+    let cloudKitManager = CloudKitManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       
@@ -44,14 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             return true
         }
         
-    
         viewController.coreDataStack = coreDataStack
         viewController2.coreDataStack = coreDataStack
         
-        let operation = OperationQueue()
-        let fetchAllRecordZonesOperation = FetchAllRecordZonesOperation.fetchAllRecordZonesOperation()
-        fetchAllRecordZonesOperation.database = container.privateCloudDatabase
-        operation.addOperation(fetchAllRecordZonesOperation)
+        cloudKitManager.initialisationOperation()
         
         
 //        configureCloudKit()
@@ -144,7 +137,7 @@ extension AppDelegate {
             
         }
         
-        container.publicCloudDatabase.add(operation)
+        cloudKitManager.container.publicCloudDatabase.add(operation)
     }
     
     private func importCloudKitDataIfNeeded(toUpdate viewController: DinnerItemTableViewController) {
@@ -197,7 +190,7 @@ extension AppDelegate {
             
         }
         
-        container.privateCloudDatabase.add(operation)
+        cloudKitManager.container.privateCloudDatabase.add(operation)
     }
     private func checkBackgroundPicturesPresent() {
         let fetchRequest : NSFetchRequest<BackgroundPictures> = BackgroundPictures.fetchRequest()

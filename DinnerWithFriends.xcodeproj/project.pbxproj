@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C9B226AB2017690900B65052 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B226AA2017690900B65052 /* CloudKitManager.swift */; };
 		CC7729BD20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC7729BB20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld */; };
 		CC7729BF20131E1800BDBD13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC7729BE20131E1800BDBD13 /* Assets.xcassets */; };
 		CC7729C220131E1800BDBD13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC7729C020131E1800BDBD13 /* LaunchScreen.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C9B226AA2017690900B65052 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		CC7729B120131E1800BDBD13 /* DinnerWithFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DinnerWithFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC7729BC20131E1800BDBD13 /* DinnerWithFriends.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DinnerWithFriends.xcdatamodel; sourceTree = "<group>"; };
 		CC7729BE20131E1800BDBD13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				CC7729F42014989600BDBD13 /* DinnerItem.swift */,
 				CC7729C920131E1D00BDBD13 /* DinnerWithFriends.entitlements */,
 				CC7729E3201492A300BDBD13 /* AppDelegate.swift */,
+				C9B226AA2017690900B65052 /* CloudKitManager.swift */,
 				CC7729CD201325D300BDBD13 /* Main.storyboard */,
 				CC7729BE20131E1800BDBD13 /* Assets.xcassets */,
 				CC7729C020131E1800BDBD13 /* LaunchScreen.storyboard */,
@@ -273,6 +276,7 @@
 				CC7729ED2014966500BDBD13 /* DinnerItems+CoreDataClass.swift in Sources */,
 				CC7729D8201491E400BDBD13 /* DinnerCreatorViewController.swift in Sources */,
 				CC7729D7201491E400BDBD13 /* CreateDinnerCollectionView.swift in Sources */,
+				C9B226AB2017690900B65052 /* CloudKitManager.swift in Sources */,
 				CC7729FA20162E4900BDBD13 /* Enum.swift in Sources */,
 				CC7729EB2014966500BDBD13 /* BackgroundPictures+CoreDataClass.swift in Sources */,
 				CC7729DF2014922200BDBD13 /* DinnerItemTableViewCell.swift in Sources */,
