@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C97AC58B20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC58A20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift */; };
+		C97AC58E20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC58D20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift */; };
 		C9B226AB2017690900B65052 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B226AA2017690900B65052 /* CloudKitManager.swift */; };
 		CC7729BD20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC7729BB20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld */; };
 		CC7729BF20131E1800BDBD13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC7729BE20131E1800BDBD13 /* Assets.xcassets */; };
@@ -37,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C97AC58A20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchAllSubscriptionsOperation.swift; path = "Operations/New Group/FetchAllSubscriptionsOperation.swift"; sourceTree = SOURCE_ROOT; };
+		C97AC58D20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProcessServerSubscriptionOperation.swift; path = Operations/SubscriptionsOperations/ProcessServerSubscriptionOperation.swift; sourceTree = SOURCE_ROOT; };
 		C9B226AA2017690900B65052 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		CC7729B120131E1800BDBD13 /* DinnerWithFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DinnerWithFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC7729BC20131E1800BDBD13 /* DinnerWithFriends.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DinnerWithFriends.xcdatamodel; sourceTree = "<group>"; };
@@ -81,6 +85,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C97AC58C201854E1005AD3D5 /* SubscriptionsOperations */ = {
+			isa = PBXGroup;
+			children = (
+				C97AC58A20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift */,
+				C97AC58D20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift */,
+			);
+			name = SubscriptionsOperations;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		C97AC58F20188534005AD3D5 /* RecordZonesOperation */ = {
+			isa = PBXGroup;
+			children = (
+				CC7729F620162DF400BDBD13 /* FetchAllRecordZonesOperation.swift */,
+				CC7729FC20164E2200BDBD13 /* ProcessServerRecordZonesOperation.swift */,
+			);
+			path = RecordZonesOperation;
+			sourceTree = "<group>";
+		};
 		CC7729A820131E1800BDBD13 = {
 			isa = PBXGroup;
 			children = (
@@ -167,8 +190,8 @@
 		CC7729F820162E2600BDBD13 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				CC7729F620162DF400BDBD13 /* FetchAllRecordZonesOperation.swift */,
-				CC7729FC20164E2200BDBD13 /* ProcessServerRecordZonesOperation.swift */,
+				C97AC58F20188534005AD3D5 /* RecordZonesOperation */,
+				C97AC58C201854E1005AD3D5 /* SubscriptionsOperations */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -267,7 +290,9 @@
 				CC7729E4201492A300BDBD13 /* AppDelegate.swift in Sources */,
 				CC7729E22014922200BDBD13 /* DinnerItemDetailViewController.swift in Sources */,
 				CC7729BD20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld in Sources */,
+				C97AC58B20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift in Sources */,
 				CC7729E12014922200BDBD13 /* DinnerDetailCategoryCollectionView.swift in Sources */,
+				C97AC58E20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift in Sources */,
 				CC7729F52014989600BDBD13 /* DinnerItem.swift in Sources */,
 				CC7729FD20164E2200BDBD13 /* ProcessServerRecordZonesOperation.swift in Sources */,
 				CC7729F02014966500BDBD13 /* Dinners+CoreDataProperties.swift in Sources */,

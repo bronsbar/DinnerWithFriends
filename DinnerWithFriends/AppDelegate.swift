@@ -45,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         viewController2.coreDataStack = coreDataStack
         
         cloudKitManager.initialisationOperation()
+        cloudKitManager.subscribeToDatabaseZones()
         
         
 //        configureCloudKit()

@@ -52,6 +52,9 @@ class CloudKitManager {
         operation.addOperation(processServerRecordZonesOperation)
         operation.addOperation(transferProcessedZonesOperation)
         operation.addOperation(modifyRecordZonesOperation)
+        
+        // wait until these operations have finished before the queue can launch next set of operations ( subscriptions)
+        modifyRecordZonesOperation.waitUntilFinished()
         }
     
 
@@ -78,5 +81,72 @@ class CloudKitManager {
         }
         return modifyRecordZonesOperation
     }
+}
+// MARK - Create database zone subscriptions
+extension CloudKitManager {
+    
+    func subscribeToDatabaseZones() {
+        // 1. fetch all subscriptions
+        // 2. process those that need to be created and those that need to be deleted
+        // 3. Make the adjustment in the Cloud
+        
+        let fetchAllSubscriptionOperation = FetchAllSubscriptionsOperation.fetchAllSubscriptionsOperation()
+        let processServerSubscriptionOperation = ProcessServerSubscriptionOperation()
+        let modifySuscriptionOperation = self.createModifySubscriptionOperation()
+        
+        let transferFetchedSubscriptionOperation = BlockOperation {
+            [unowned processServerSubscriptionOperation, fetchAllSubscriptionOperation ] in
+            processServerSubscriptionOperation.preProcessedFetchedSubscriptions = fetchAllSubscriptionOperation.fetchedSubscriptions
+        }
+        
+        let transferProcessedSubscriptionOperation = BlockOperation {
+            [unowned modifySuscriptionOperation, unowned processServerSubscriptionOperation] in
+            modifySuscriptionOperation.subscriptionsToSave = processServerSubscriptionOperation.postProcessSubscriptionsToCreate
+            modifySuscriptionOperation.subscriptionIDsToDelete = processServerSubscriptionOperation.postProcessSubscriptionsToDelete
+        }
+        // dependencies
+        transferFetchedSubscriptionOperation.addDependency(fetchAllSubscriptionOperation)
+        processServerSubscriptionOperation.addDependency(transferFetchedSubscriptionOperation)
+        transferProcessedSubscriptionOperation.addDependency(processServerSubscriptionOperation)
+        modifySuscriptionOperation.addDependency(transferProcessedSubscriptionOperation)
+        
+        // load operations
+        self.operation.addOperation(fetchAllSubscriptionOperation)
+        self.operation.addOperation(transferFetchedSubscriptionOperation)
+        self.operation.addOperation(processServerSubscriptionOperation)
+        self.operation.addOperation(transferProcessedSubscriptionOperation)
+        self.operation.addOperation(modifySuscriptionOperation)
+        
+    }
+    
+    private func createModifySubscriptionOperation() -> CKModifySubscriptionsOperation {
+        let modifySubscriptionOperation = CKModifySubscriptionsOperation()
+        
+        modifySubscriptionOperation.modifySubscriptionsCompletionBlock = { (modifiedSubscriptions, deletedSubscriptionsIDs, error) in
+            print ("CKModifySubscriptionsOperation.modifySubscriptionsCompletionBlock")
+            
+            if let error = error {
+                print ("createModifySubscriptionOperation ERROR: \(error)")
+                return
+            }
+            if let modifiedSubscriptions = modifiedSubscriptions {
+                for subscription in modifiedSubscriptions {
+                    print ("Modified subscription : \(subscription)")
+                }
+            }
+            if let deletedSubscriptionsIDs = deletedSubscriptionsIDs {
+                for subscriptionID in deletedSubscriptionsIDs {
+                    print ("Deleted subscriptionIDs : \(subscriptionID)")
+                }
+            }
+        }
+        return modifySubscriptionOperation
+        
+        
+        
+        
+        return modifySubscriptionOperation
+    }
+    
 }
 
