@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C972DF20201B30AD00ED97BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF1F201B30AD00ED97BF /* AppDelegate.swift */; };
+		C972DF23201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF22201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift */; };
 		C97AC58B20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC58A20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift */; };
 		C97AC58E20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC58D20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift */; };
 		C97AC5912018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC5902018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		C972DF1F201B30AD00ED97BF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C972DF22201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDatabaseChangesForCloudKitOperation.swift; sourceTree = "<group>"; };
 		C97AC58A20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchAllSubscriptionsOperation.swift; path = "Operations/New Group/FetchAllSubscriptionsOperation.swift"; sourceTree = SOURCE_ROOT; };
 		C97AC58D20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProcessServerSubscriptionOperation.swift; path = Operations/SubscriptionsOperations/ProcessServerSubscriptionOperation.swift; sourceTree = SOURCE_ROOT; };
 		C97AC5902018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchAllPublicDatabaseSubscriptionsOperation.swift; path = Operations/SubscriptionsOperations/FetchAllPublicDatabaseSubscriptionsOperation.swift; sourceTree = SOURCE_ROOT; };
@@ -89,6 +91,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C972DF21201B7A2B00ED97BF /* FetchRecordOperations */ = {
+			isa = PBXGroup;
+			children = (
+				C972DF22201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift */,
+			);
+			path = FetchRecordOperations;
+			sourceTree = "<group>";
+		};
 		C97AC58C201854E1005AD3D5 /* SubscriptionsOperations */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +127,7 @@
 				CC7729F12014969D00BDBD13 /* CoreData */,
 				CC7729F22014972100BDBD13 /* ViewCells and Views */,
 				CC7729F32014977700BDBD13 /* ViewControllers */,
+				C972DF21201B7A2B00ED97BF /* FetchRecordOperations */,
 				CC7729F820162E2600BDBD13 /* Operations */,
 				CC7729B320131E1800BDBD13 /* DinnerWithFriends */,
 				CC7729B220131E1800BDBD13 /* Products */,
@@ -305,6 +316,7 @@
 				CC7729D6201491E400BDBD13 /* DinnerItemCollectionViewCell.swift in Sources */,
 				CC7729F720162DF400BDBD13 /* FetchAllRecordZonesOperation.swift in Sources */,
 				CC7729ED2014966500BDBD13 /* DinnerItems+CoreDataClass.swift in Sources */,
+				C972DF23201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift in Sources */,
 				CC7729D8201491E400BDBD13 /* DinnerCreatorViewController.swift in Sources */,
 				CC7729D7201491E400BDBD13 /* CreateDinnerCollectionView.swift in Sources */,
 				C9B226AB2017690900B65052 /* CloudKitManager.swift in Sources */,

@@ -60,4 +60,5 @@ enum PublicDatabaseTypes : String {
 
 enum UserDefaultKeys : String {
     case subscribedToPublicChanges = "subscribedToPublicChanges"
+    case publicServerChangeToken = "publicServerChangeToken"
 }
