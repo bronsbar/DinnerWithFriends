@@ -32,3 +32,32 @@ enum CloudKitZone: String {
         return notificationInfo
     }
 }
+
+enum PublicDatabaseQuerySubscription: String {
+    case publicDatabaseChange = "publicDatabaseChange"
+    
+    static let allPublicDatabaseSubscriptions = [PublicDatabaseQuerySubscription.publicDatabaseChange.rawValue]
+    
+    func publicDatabaseQuerySubscription() -> CKQuerySubscription {
+        let predicate = NSPredicate(value: true)
+        let querySubscription = CKQuerySubscription(recordType: PublicDatabaseTypes.backgroundPicture.rawValue, predicate: predicate, subscriptionID: self.rawValue, options: [.firesOnRecordCreation,.firesOnRecordDeletion,.firesOnRecordUpdate])
+        querySubscription.notificationInfo = self.notificationInfo()
+        return querySubscription
+    }
+    func notificationInfo() -> CKNotificationInfo {
+        let notificationInfo = CKNotificationInfo()
+        notificationInfo.alertBody = "Subscription Notification for \(self.rawValue)"
+        notificationInfo.shouldSendContentAvailable = true
+        notificationInfo.shouldBadge = false
+        return notificationInfo
+    }
+}
+
+enum PublicDatabaseTypes : String {
+    case dinnerItem = "DinnerItem"
+    case backgroundPicture = "BackgroundPicture"
+}
+
+enum UserDefaultKeys : String {
+    case subscribedToPublicChanges = "subscribedToPublicChanges"
+}

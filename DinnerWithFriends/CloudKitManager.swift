@@ -34,7 +34,7 @@ class CloudKitManager {
         }
         
         let transferProcessedZonesOperation = BlockOperation {
-            [modifyRecordZonesOperation, unowned processServerRecordZonesOperation] in
+            [unowned modifyRecordZonesOperation, unowned processServerRecordZonesOperation] in
             modifyRecordZonesOperation.recordZonesToSave = processServerRecordZonesOperation.postProcessRecordZonesToCreate
             modifyRecordZonesOperation.recordZoneIDsToDelete = processServerRecordZonesOperation.postProcessRecordZonesToDelete
         }
@@ -45,6 +45,7 @@ class CloudKitManager {
         processServerRecordZonesOperation.addDependency(transferFetchedZonesOperation)
         transferProcessedZonesOperation.addDependency(processServerRecordZonesOperation)
         modifyRecordZonesOperation.addDependency(transferProcessedZonesOperation)
+        modifyRecordZonesOperation.addDependency(fetchAllRecordZonesOperation)
         
        //add operations
         operation.addOperation(fetchAllRecordZonesOperation)
@@ -92,30 +93,31 @@ extension CloudKitManager {
         
         let fetchAllSubscriptionOperation = FetchAllSubscriptionsOperation.fetchAllSubscriptionsOperation()
         let processServerSubscriptionOperation = ProcessServerSubscriptionOperation()
-        let modifySuscriptionOperation = self.createModifySubscriptionOperation()
+        let modifySubscriptionOperation = self.createModifySubscriptionOperation()
         
         let transferFetchedSubscriptionOperation = BlockOperation {
-            [unowned processServerSubscriptionOperation, fetchAllSubscriptionOperation ] in
+            [unowned processServerSubscriptionOperation, unowned fetchAllSubscriptionOperation ] in
             processServerSubscriptionOperation.preProcessedFetchedSubscriptions = fetchAllSubscriptionOperation.fetchedSubscriptions
         }
         
         let transferProcessedSubscriptionOperation = BlockOperation {
-            [unowned modifySuscriptionOperation, unowned processServerSubscriptionOperation] in
-            modifySuscriptionOperation.subscriptionsToSave = processServerSubscriptionOperation.postProcessSubscriptionsToCreate
-            modifySuscriptionOperation.subscriptionIDsToDelete = processServerSubscriptionOperation.postProcessSubscriptionsToDelete
+            [unowned modifySubscriptionOperation, unowned processServerSubscriptionOperation] in
+            modifySubscriptionOperation.subscriptionsToSave = processServerSubscriptionOperation.postProcessSubscriptionsToCreate
+            modifySubscriptionOperation.subscriptionIDsToDelete = processServerSubscriptionOperation.postProcessSubscriptionsToDelete
         }
         // dependencies
         transferFetchedSubscriptionOperation.addDependency(fetchAllSubscriptionOperation)
         processServerSubscriptionOperation.addDependency(transferFetchedSubscriptionOperation)
         transferProcessedSubscriptionOperation.addDependency(processServerSubscriptionOperation)
-        modifySuscriptionOperation.addDependency(transferProcessedSubscriptionOperation)
+        modifySubscriptionOperation.addDependency(transferProcessedSubscriptionOperation)
+        modifySubscriptionOperation.addDependency(fetchAllSubscriptionOperation)
         
         // load operations
         self.operation.addOperation(fetchAllSubscriptionOperation)
         self.operation.addOperation(transferFetchedSubscriptionOperation)
         self.operation.addOperation(processServerSubscriptionOperation)
         self.operation.addOperation(transferProcessedSubscriptionOperation)
-        self.operation.addOperation(modifySuscriptionOperation)
+        self.operation.addOperation(modifySubscriptionOperation)
         
     }
     
@@ -141,12 +143,157 @@ extension CloudKitManager {
             }
         }
         return modifySubscriptionOperation
-        
-        
-        
-        
-        return modifySubscriptionOperation
     }
     
+}
+//MARK - Create Publicdatabase Subscription
+
+extension CloudKitManager {
+    func createPublicDatabaseSubscription() {
+        let usersDefault = UserDefaults.standard
+        if usersDefault.exists(key:UserDefaultKeys.subscribedToPublicChanges.rawValue ) {
+            return
+        }
+        let recordType = PublicDatabaseTypes.backgroundPicture.rawValue
+        let predicate = NSPredicate(value: true)
+        let publicDatabaseSubscription = CKQuerySubscription(recordType: recordType, predicate: predicate, subscriptionID: PublicDatabaseQuerySubscription.publicDatabaseChange.rawValue, options: [.firesOnRecordDeletion,.firesOnRecordUpdate,.firesOnRecordCreation])
+        let notificationInfo = CKNotificationInfo()
+        notificationInfo.desiredKeys = ["name"]
+        notificationInfo.shouldSendContentAvailable = true
+        publicDatabaseSubscription.notificationInfo = notificationInfo
+        let modifySubscriptionOperation = CKModifySubscriptionsOperation(subscriptionsToSave: [publicDatabaseSubscription], subscriptionIDsToDelete: nil)
+        modifySubscriptionOperation.modifySubscriptionsCompletionBlock = {
+            (savedSubscriptions, deletedSubscriptionsIDs, error) in
+            if let error = error {
+                print ("Public DatabaseSubscription Error : \(error)")
+                return
+            }
+            if let savedSubscriptions = savedSubscriptions {
+                for subscriptionsSaved in savedSubscriptions {
+                    print ("Seved Subscriptions : \(subscriptionsSaved)")
+                }
+            }
+            if let deletedSubscriptionsIDs = deletedSubscriptionsIDs {
+                for deletedSubscriptions in deletedSubscriptionsIDs {
+                    print ("Deleted subscriptionsIDs: \(deletedSubscriptions)")
+                }
+            }
+        usersDefault.set(true, forKey: UserDefaultKeys.subscribedToPublicChanges.rawValue)
+        }
+        modifySubscriptionOperation.database = container.publicCloudDatabase
+       operation.addOperation(modifySubscriptionOperation)
+    }
+    
+    func subscribeToPublicDatabase () {
+        // 1. fetch all subscriptions
+        // 2. process those that need to be created and those that need to be deleted
+        // 3. Make the adjustment in the Cloud
+        
+        let fetchAllSubscriptionOperation = FetchAllPublicDatabaseSubscriptionsOperation.fetchAllSubscriptionsOperation()
+        fetchAllSubscriptionOperation.database = container.publicCloudDatabase
+        
+        let processServerSubscriptionOperation = ProcessServerPublicDatabaseSubscriptionOperation()
+        let modifySubscriptionOperation = self.createModifyPublicSubscriptionOperation()
+        
+        let transferFetchedSubscriptionOperation = BlockOperation {
+            [unowned processServerSubscriptionOperation, unowned fetchAllSubscriptionOperation ] in
+            processServerSubscriptionOperation.preProcessedFetchedSubscriptions = fetchAllSubscriptionOperation.fetchedSubscriptions
+        }
+        
+        let transferProcessedSubscriptionOperation = BlockOperation {
+            [unowned modifySubscriptionOperation, unowned processServerSubscriptionOperation] in
+            modifySubscriptionOperation.subscriptionsToSave = processServerSubscriptionOperation.postProcessSubscriptionsToCreate
+            modifySubscriptionOperation.subscriptionIDsToDelete = processServerSubscriptionOperation.postProcessSubscriptionsToDelete
+        }
+        // dependencies
+        transferFetchedSubscriptionOperation.addDependency(fetchAllSubscriptionOperation)
+        processServerSubscriptionOperation.addDependency(transferFetchedSubscriptionOperation)
+        transferProcessedSubscriptionOperation.addDependency(processServerSubscriptionOperation)
+        modifySubscriptionOperation.addDependency(transferProcessedSubscriptionOperation)
+        modifySubscriptionOperation.addDependency(fetchAllSubscriptionOperation)
+        
+        // load operations
+        self.operation.addOperation(fetchAllSubscriptionOperation)
+        self.operation.addOperation(transferFetchedSubscriptionOperation)
+        self.operation.addOperation(processServerSubscriptionOperation)
+        self.operation.addOperation(transferProcessedSubscriptionOperation)
+        self.operation.addOperation(modifySubscriptionOperation)
+        
+    }
+    
+    private func createModifyPublicSubscriptionOperation() -> CKModifySubscriptionsOperation {
+        let modifyPublicSubscriptionOperation = CKModifySubscriptionsOperation()
+        modifyPublicSubscriptionOperation.database = container.publicCloudDatabase
+        
+        modifyPublicSubscriptionOperation.modifySubscriptionsCompletionBlock = { (modifiedSubscriptions, deletedSubscriptionsIDs, error) in
+            print ("CKModifyPublicSubscriptionsOperation.modifySubscriptionsCompletionBlock")
+            
+            if let error = error {
+                print ("createModifyPublicSubscriptionOperation ERROR: \(error)")
+                return
+            }
+            if let modifiedSubscriptions = modifiedSubscriptions {
+                for subscription in modifiedSubscriptions {
+                    print ("Modified Public Subscription : \(subscription)")
+                }
+            }
+            if let deletedSubscriptionsIDs = deletedSubscriptionsIDs {
+                for subscriptionID in deletedSubscriptionsIDs {
+                    print ("Deleted Public SubscriptionIDs : \(subscriptionID)")
+                }
+            }
+            //create Default key "subscribedToPublicChanges"
+            
+            let userDefault = UserDefaults.standard
+            userDefault.set(true, forKey: UserDefaultKeys.subscribedToPublicChanges.rawValue)
+        }
+        return modifyPublicSubscriptionOperation
+    }
+    
+}
+// MARK: -Sync changes in CloudKit Locally
+
+extension CloudKitManager {
+    func synZone(notification: CKNotification , completionBlockOperation: BlockOperation) {
+        
+        switch notification.notificationType {
+        case .query :
+            let queryNotification = notification as! CKQueryNotification
+            let databaseScope = queryNotification.databaseScope
+            let queryNotificationReason = queryNotification.queryNotificationReason.rawValue
+            let queryRecordFields = queryNotification.recordFields
+            if let recordID = queryNotification.recordID {
+                print ("Cloudkitmanager called on query notification")
+                print ("databaseScope : \(databaseScope.rawValue)")
+                print ("recordID : \(recordID)")
+                print ("query reason: \(queryNotificationReason)")
+                if let queryRecordfields = queryRecordFields {
+                    for changedField in queryRecordfields {
+                        print("field : \(changedField.key), value : \(changedField.value)")
+                    }
+                }
+                operation.addOperation(completionBlockOperation)
+                
+            }
+            
+        case .recordZone :
+            let cloudKitZoneNotificationUserInfo = notification as! CKRecordZoneNotification
+            let databaseScope = cloudKitZoneNotificationUserInfo.databaseScope
+            if let recordZoneID = cloudKitZoneNotificationUserInfo.recordZoneID {
+                print ("Cloudkitmanger called on zone change notification")
+                print ("databaseScope : \(databaseScope.rawValue)")
+                print ("recordzoneID : \(recordZoneID)")
+                operation.addOperation(completionBlockOperation)
+            }
+        default :
+            break
+        }
+    }
+}
+
+extension UserDefaults {
+    func exists(key:String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
+    }
 }
 

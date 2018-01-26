@@ -46,6 +46,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         cloudKitManager.initialisationOperation()
         cloudKitManager.subscribeToDatabaseZones()
+//        cloudKitManager.createPublicDatabaseSubscription()
+        let userDefault = UserDefaults.standard
+        if !userDefault.exists(key: UserDefaultKeys.subscribedToPublicChanges.rawValue) {
+             cloudKitManager.subscribeToPublicDatabase()
+        }
+     
         
         
 //        configureCloudKit()
@@ -65,11 +71,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("received notification")
         
-        let dict = userInfo as! [String : NSObject]
-        guard let notification:CKDatabaseNotification = CKNotification(fromRemoteNotificationDictionary: dict) as? CKDatabaseNotification else { return }
-//        fetchChanges(in: notification.databaseScope) {
-//            completionHandler(.newData)
-//        }
+        if let stringObjectUserInfo = userInfo as? [String : NSObject] {
+            let notification = CKNotification(fromRemoteNotificationDictionary: stringObjectUserInfo)
+            let completionBlockOperation = BlockOperation(block: {
+                completionHandler(UIBackgroundFetchResult.newData)
+            })
+            cloudKitManager.synZone(notification: notification, completionBlockOperation: completionBlockOperation)
+        }
+        else {
+            completionHandler(UIBackgroundFetchResult.noData)
+        }
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -129,7 +140,7 @@ extension AppDelegate {
         let query = CKQuery(recordType: "BackgroundPicture", predicate: predicate)
         let operation = CKQueryOperation(query: query)
         operation.recordFetchedBlock = { record in
-            if let asset = record.object(forKey: "image") as? CKAsset,
+            if let asset = record.object(forKey: "picture") as? CKAsset,
                 let data = NSData(contentsOf: asset.fileURL),
                 let image = UIImage(data: data as Data) {
                 self.dinnerPictures.append(image)
@@ -203,7 +214,7 @@ extension AppDelegate {
         }
     }
 }
-    
+
 //    private func subscribeToChangeNotifications() {
 //        // check if there is a Local UserDefault file and if so what is the value of the subscribedToPrivateChanges key
 //        let userDefault = UserDefaults.standard
@@ -274,15 +285,17 @@ extension AppDelegate {
 //        operation.qualityOfService = .utility
 //        return operation
 //    }
-//
+////
 //    func fetchChanges(in databaseScope: CKDatabaseScope, completion: @escaping () -> Void) {
 //        switch databaseScope {
 //        case .private:
-//          fetchDatabaseChanges(database: container.privateCloudDatabase, databaseTokenKey: "private", completion: completion)
+//            break
+////          fetchDatabaseChanges(database: container.privateCloudDatabase, databaseTokenKey: "private", completion: completion)
 //        case .shared:
-//            fetchDatabaseChanges(database: container.sharedCloudDatabase, databaseTokenKey: "shared", completion: completion)
+//            break
+////            fetchDatabaseChanges(database: container.sharedCloudDatabase, databaseTokenKey: "shared", completion: completion)
 //        case .public:
-//            fatalError()
+//            fetchDatabaseChanges(database: container.publ, databaseTokenKey: "shared", completion: completion)
 //        }
 //    }
 //    func fetchDatabaseChanges (database : CKDatabase, databaseTokenKey: String, completion: @escaping () -> Void) {
