@@ -62,3 +62,9 @@ enum UserDefaultKeys : String {
     case subscribedToPublicChanges = "subscribedToPublicChanges"
     case publicServerChangeToken = "publicServerChangeToken"
 }
+
+extension UserDefaults {
+    func exists(key:String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
+    }
+}

@@ -68,7 +68,7 @@ func getServerChangeToken(databaseScope : CKDatabaseScope, cloudKitZone: CloudKi
         } else { serverChangeToken = nil}
     } else {
         serverChangeToken = nil
-    }
+    }// implement the return of the serverchange token for non public database
         return serverChangeToken
 }
 

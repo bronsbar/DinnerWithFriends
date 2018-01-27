@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C972DF20201B30AD00ED97BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF1F201B30AD00ED97BF /* AppDelegate.swift */; };
 		C972DF23201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF22201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift */; };
+		C972DF25201C664100ED97BF /* FetchRecordZoneChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF24201C664100ED97BF /* FetchRecordZoneChangesOperation.swift */; };
+		C972DF28201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF27201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift */; };
 		C97AC58B20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC58A20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift */; };
 		C97AC58E20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC58D20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift */; };
 		C97AC5912018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC5902018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift */; };
@@ -44,6 +46,8 @@
 /* Begin PBXFileReference section */
 		C972DF1F201B30AD00ED97BF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C972DF22201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDatabaseChangesForCloudKitOperation.swift; sourceTree = "<group>"; };
+		C972DF24201C664100ED97BF /* FetchRecordZoneChangesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecordZoneChangesOperation.swift; sourceTree = "<group>"; };
+		C972DF27201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UpdatePublicDatabaseCoreData.swift; path = Operations/CoreDataOperations/UpdatePublicDatabaseCoreData.swift; sourceTree = "<group>"; };
 		C97AC58A20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchAllSubscriptionsOperation.swift; path = "Operations/New Group/FetchAllSubscriptionsOperation.swift"; sourceTree = SOURCE_ROOT; };
 		C97AC58D20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProcessServerSubscriptionOperation.swift; path = Operations/SubscriptionsOperations/ProcessServerSubscriptionOperation.swift; sourceTree = SOURCE_ROOT; };
 		C97AC5902018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchAllPublicDatabaseSubscriptionsOperation.swift; path = Operations/SubscriptionsOperations/FetchAllPublicDatabaseSubscriptionsOperation.swift; sourceTree = SOURCE_ROOT; };
@@ -95,8 +99,16 @@
 			isa = PBXGroup;
 			children = (
 				C972DF22201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift */,
+				C972DF24201C664100ED97BF /* FetchRecordZoneChangesOperation.swift */,
 			);
 			path = FetchRecordOperations;
+			sourceTree = "<group>";
+		};
+		C972DF26201C80D500ED97BF /* CoreDataOperations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreDataOperations;
 			sourceTree = "<group>";
 		};
 		C97AC58C201854E1005AD3D5 /* SubscriptionsOperations */ = {
@@ -123,11 +135,11 @@
 		CC7729A820131E1800BDBD13 = {
 			isa = PBXGroup;
 			children = (
+				C972DF27201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift */,
 				CC7729FB20162F9B00BDBD13 /* Enums */,
 				CC7729F12014969D00BDBD13 /* CoreData */,
 				CC7729F22014972100BDBD13 /* ViewCells and Views */,
 				CC7729F32014977700BDBD13 /* ViewControllers */,
-				C972DF21201B7A2B00ED97BF /* FetchRecordOperations */,
 				CC7729F820162E2600BDBD13 /* Operations */,
 				CC7729B320131E1800BDBD13 /* DinnerWithFriends */,
 				CC7729B220131E1800BDBD13 /* Products */,
@@ -207,6 +219,8 @@
 		CC7729F820162E2600BDBD13 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				C972DF26201C80D500ED97BF /* CoreDataOperations */,
+				C972DF21201B7A2B00ED97BF /* FetchRecordOperations */,
 				C97AC58F20188534005AD3D5 /* RecordZonesOperation */,
 				C97AC58C201854E1005AD3D5 /* SubscriptionsOperations */,
 			);
@@ -330,6 +344,8 @@
 				CC7729D5201491E400BDBD13 /* MenuBarCollectionViewCell.swift in Sources */,
 				CC7729EF2014966500BDBD13 /* Dinners+CoreDataClass.swift in Sources */,
 				C97AC5912018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift in Sources */,
+				C972DF25201C664100ED97BF /* FetchRecordZoneChangesOperation.swift in Sources */,
+				C972DF28201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift in Sources */,
 				CC7729EC2014966500BDBD13 /* BackgroundPictures+CoreDataProperties.swift in Sources */,
 				CC7729DA2014920800BDBD13 /* CoreDataStack.swift in Sources */,
 			);
