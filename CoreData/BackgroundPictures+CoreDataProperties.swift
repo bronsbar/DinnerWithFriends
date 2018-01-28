@@ -2,7 +2,7 @@
 //  BackgroundPictures+CoreDataProperties.swift
 //  DinnerWithFriends
 //
-//  Created by Bart Bronselaer on 21/01/18.
+//  Created by Bart Bronselaer on 28/01/18.
 //  Copyright © 2018 Bart Bronselaer. All rights reserved.
 //
 //
@@ -26,6 +26,5 @@ extension BackgroundPictures {
     @NSManaged public var picture: NSData?
     @NSManaged public var pictureName: String?
     @NSManaged public var recordName: String?
-    @NSManaged public var recordType: String?
 
 }

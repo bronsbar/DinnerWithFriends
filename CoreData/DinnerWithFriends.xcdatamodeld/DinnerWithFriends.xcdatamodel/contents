@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C205" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D47" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="BackgroundPictures" representedClassName="BackgroundPictures" syncable="YES">
         <attribute name="ckChangeTag" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckDatabase" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -10,7 +10,6 @@
         <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="pictureName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="recordType" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="DinnerItems" representedClassName="DinnerItems" syncable="YES">
         <attribute name="addedDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -43,7 +42,7 @@
         <relationship name="dinnerItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DinnerItems" inverseName="dinners" inverseEntity="DinnerItems" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BackgroundPictures" positionX="-63" positionY="-18" width="128" height="195"/>
+        <element name="BackgroundPictures" positionX="-63" positionY="-18" width="128" height="180"/>
         <element name="DinnerItems" positionX="-54" positionY="63" width="128" height="255"/>
         <element name="Dinners" positionX="-36" positionY="144" width="128" height="225"/>
     </elements>

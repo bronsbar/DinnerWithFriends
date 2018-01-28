@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CloudKit
 
 protocol CloudKitRecordIDObject {
     var recordID: NSData? {get set}
@@ -15,4 +16,7 @@ protocol CloudKitRecordIDObject {
 protocol CloudKitManagedObject: CloudKitRecordIDObject {
     var lastUpdated : NSDate? {get set}
     var recordName :String? {get set}
+    var recordType : String {get}
+//    func managedObjectToRecord(record: CKRecord?) -> CKRecord
+    func updateWithRecord(record: CKRecord)
 }

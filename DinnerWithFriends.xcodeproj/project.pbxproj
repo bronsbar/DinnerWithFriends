@@ -12,6 +12,7 @@
 		C972DF25201C664100ED97BF /* FetchRecordZoneChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF24201C664100ED97BF /* FetchRecordZoneChangesOperation.swift */; };
 		C972DF28201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF27201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift */; };
 		C9745B95201E0CF000C34A97 /* CoreDataPRotocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9745B94201E0CF000C34A97 /* CoreDataPRotocols.swift */; };
+		C9745B9D201E1F6200C34A97 /* BackgroundPictures+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9745B9C201E1F6200C34A97 /* BackgroundPictures+CoreDataProperties.swift */; };
 		C97AC58B20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC58A20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift */; };
 		C97AC58E20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC58D20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift */; };
 		C97AC5912018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC5902018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift */; };
@@ -33,7 +34,6 @@
 		CC7729E12014922200BDBD13 /* DinnerDetailCategoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729DD2014922200BDBD13 /* DinnerDetailCategoryCollectionView.swift */; };
 		CC7729E22014922200BDBD13 /* DinnerItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729DE2014922200BDBD13 /* DinnerItemDetailViewController.swift */; };
 		CC7729EB2014966500BDBD13 /* BackgroundPictures+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729E52014966500BDBD13 /* BackgroundPictures+CoreDataClass.swift */; };
-		CC7729EC2014966500BDBD13 /* BackgroundPictures+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729E62014966500BDBD13 /* BackgroundPictures+CoreDataProperties.swift */; };
 		CC7729ED2014966500BDBD13 /* DinnerItems+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729E72014966500BDBD13 /* DinnerItems+CoreDataClass.swift */; };
 		CC7729EE2014966500BDBD13 /* DinnerItems+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729E82014966500BDBD13 /* DinnerItems+CoreDataProperties.swift */; };
 		CC7729EF2014966500BDBD13 /* Dinners+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7729E92014966500BDBD13 /* Dinners+CoreDataClass.swift */; };
@@ -50,6 +50,7 @@
 		C972DF24201C664100ED97BF /* FetchRecordZoneChangesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecordZoneChangesOperation.swift; sourceTree = "<group>"; };
 		C972DF27201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UpdatePublicDatabaseCoreData.swift; path = Operations/CoreDataOperations/UpdatePublicDatabaseCoreData.swift; sourceTree = "<group>"; };
 		C9745B94201E0CF000C34A97 /* CoreDataPRotocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CoreDataPRotocols.swift; path = DinnerWithFriends/Protocols/CoreDataPRotocols.swift; sourceTree = "<group>"; };
+		C9745B9C201E1F6200C34A97 /* BackgroundPictures+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackgroundPictures+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C97AC58A20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchAllSubscriptionsOperation.swift; path = "Operations/New Group/FetchAllSubscriptionsOperation.swift"; sourceTree = SOURCE_ROOT; };
 		C97AC58D20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProcessServerSubscriptionOperation.swift; path = Operations/SubscriptionsOperations/ProcessServerSubscriptionOperation.swift; sourceTree = SOURCE_ROOT; };
 		C97AC5902018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchAllPublicDatabaseSubscriptionsOperation.swift; path = Operations/SubscriptionsOperations/FetchAllPublicDatabaseSubscriptionsOperation.swift; sourceTree = SOURCE_ROOT; };
@@ -74,7 +75,6 @@
 		CC7729DD2014922200BDBD13 /* DinnerDetailCategoryCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerDetailCategoryCollectionView.swift; sourceTree = "<group>"; };
 		CC7729DE2014922200BDBD13 /* DinnerItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerItemDetailViewController.swift; sourceTree = "<group>"; };
 		CC7729E52014966500BDBD13 /* BackgroundPictures+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackgroundPictures+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CC7729E62014966500BDBD13 /* BackgroundPictures+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackgroundPictures+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CC7729E72014966500BDBD13 /* DinnerItems+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DinnerItems+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CC7729E82014966500BDBD13 /* DinnerItems+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DinnerItems+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CC7729E92014966500BDBD13 /* Dinners+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dinners+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 				CC7729E92014966500BDBD13 /* Dinners+CoreDataClass.swift */,
 				CC7729EA2014966500BDBD13 /* Dinners+CoreDataProperties.swift */,
 				CC7729E52014966500BDBD13 /* BackgroundPictures+CoreDataClass.swift */,
-				CC7729E62014966500BDBD13 /* BackgroundPictures+CoreDataProperties.swift */,
+				C9745B9C201E1F6200C34A97 /* BackgroundPictures+CoreDataProperties.swift */,
 				CC7729D92014920800BDBD13 /* CoreDataStack.swift */,
 				CC7729BB20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld */,
 			);
@@ -343,6 +343,7 @@
 				CC7729F720162DF400BDBD13 /* FetchAllRecordZonesOperation.swift in Sources */,
 				CC7729ED2014966500BDBD13 /* DinnerItems+CoreDataClass.swift in Sources */,
 				C972DF23201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift in Sources */,
+				C9745B9D201E1F6200C34A97 /* BackgroundPictures+CoreDataProperties.swift in Sources */,
 				CC7729D8201491E400BDBD13 /* DinnerCreatorViewController.swift in Sources */,
 				CC7729D7201491E400BDBD13 /* CreateDinnerCollectionView.swift in Sources */,
 				C9B226AB2017690900B65052 /* CloudKitManager.swift in Sources */,
@@ -358,7 +359,6 @@
 				C97AC5912018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift in Sources */,
 				C972DF25201C664100ED97BF /* FetchRecordZoneChangesOperation.swift in Sources */,
 				C972DF28201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift in Sources */,
-				CC7729EC2014966500BDBD13 /* BackgroundPictures+CoreDataProperties.swift in Sources */,
 				CC7729DA2014920800BDBD13 /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
