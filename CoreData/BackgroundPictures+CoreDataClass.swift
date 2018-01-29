@@ -26,7 +26,10 @@ public class BackgroundPictures: NSManagedObject, CloudKitManagedObject {
         self.lastUpdated = record["lastUpdate"] as? NSDate
         self.recordName = record.recordID.recordName
         self.recordID = NSKeyedArchiver.archivedData(withRootObject: record.recordID) as NSData
-        // still to assign the picture to the managed object
+        if let asset = record.object(forKey: "picture") as? CKAsset,
+            let data = NSData(contentsOf: asset.fileURL) {
+            self.picture = data
+        }
     }
     
     var recordID: NSData?
