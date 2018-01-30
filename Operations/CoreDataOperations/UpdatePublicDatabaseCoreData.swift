@@ -12,5 +12,10 @@ import CloudKit
 class UpdatePublicDatabaseCoreData: Operation {
     var changedRecords : [CKRecord]
     var deletedRecords : [CKRecordID]
+    
+    override init() {
+        self.changedRecords = []
+        self.deletedRecords = []
+    }
 
 }

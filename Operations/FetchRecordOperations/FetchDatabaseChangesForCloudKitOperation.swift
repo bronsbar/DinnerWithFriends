@@ -13,20 +13,27 @@ class FetchDatabaseChangesForCloudKitOperation: CKFetchDatabaseChangesOperation 
     var changedRecords: [CKRecord]
     var deletedRecordZoneIDs : [CKRecordZoneID]
     var changedZoneIDs : [CKRecordZoneID]
+    var optionsByRecordZoneID : [CKRecordZoneID: CKFetchRecordZoneChangesOptions]
     var operationError : Error?
+    var serverChangeToken :CKServerChangeToken!
+    var serverFetchChangeToken : [CKRecordZoneID :CKServerChangeToken]
     private let cloudKitZone : CloudKitZone
     private let databaseScope : CKDatabaseScope
+    private let coreDataStack : CoreDataStack
     
-    init(cloudKitZone: CloudKitZone, databaseScope: CKDatabaseScope) {
+    init(cloudKitZone: CloudKitZone, databaseScope: CKDatabaseScope, coreDataStack:CoreDataStack) {
         self.changedRecords = []
         self.deletedRecordZoneIDs = []
         self.changedZoneIDs = []
+        self.optionsByRecordZoneID = [:]
         self.cloudKitZone = cloudKitZone
         self.databaseScope = databaseScope
+        self.coreDataStack = coreDataStack
+        self.serverFetchChangeToken = [:]
 
         super.init()
-        self.previousServerChangeToken = getServerChangeToken(databaseScope: databaseScope, cloudKitZone: cloudKitZone)
-        }
+        
+    }
     override func main() {
         print ("FetchDatabaseChangesForCloudKitOperation.main()")
         setBlocks()
@@ -35,13 +42,18 @@ class FetchDatabaseChangesForCloudKitOperation: CKFetchDatabaseChangesOperation 
     func setBlocks() {
         recordZoneWithIDChangedBlock = { [unowned self] (zoneId) in
             self.changedZoneIDs.append(zoneId)
+            if let cloudKitZone = CloudKitZone(rawValue: zoneId.zoneName), let serverFetchToken = self.getServerChangeToken(databaseScope: self.databaseScope, cloudKitZone: cloudKitZone) {
+                self.serverFetchChangeToken[zoneId] = serverFetchToken
+            }
+            
         }
         recordZoneWithIDWasDeletedBlock = { [unowned self] (zoneID) in
             self.deletedRecordZoneIDs.append(zoneID)
         }
-        changeTokenUpdatedBlock = { (token) in
+        changeTokenUpdatedBlock = { [unowned self] (token) in
             // flush zone deletions for this database to disk
             // write this new database change token to memory
+            self.serverChangeToken = token
         }
         fetchDatabaseChangesCompletionBlock = { [unowned self] (token, moreComing, error) in
             if let error = error {
@@ -49,7 +61,19 @@ class FetchDatabaseChangesForCloudKitOperation: CKFetchDatabaseChangesOperation 
                 self.operationError = error
             }
             else {
-                self.setServerChangeToken(databaseScope: self.databaseScope, cloudKitZone: self.cloudKitZone, serverChangeToken: token)
+                guard let token = token else {
+                    print (" no token in completionblock")
+                    return
+                }
+                self.serverChangeToken = token
+                for zoneID in self.changedZoneIDs {
+                    let options = CKFetchRecordZoneChangesOptions()
+                    options.previousServerChangeToken = self.serverFetchChangeToken[zoneID]
+                    self.optionsByRecordZoneID[zoneID] = options
+                }
+                let fetchOperation = CKFetchRecordZoneChangesOperation(recordZoneIDs: self.changedZoneIDs, optionsByRecordZoneID: self.optionsByRecordZoneID)
+                fetchOperation.recordChangedBlock = {(record) in }
+                
                 
             }
         }

@@ -263,9 +263,11 @@ extension CloudKitManager {
             let queryNotificationReason = queryNotification.queryNotificationReason.rawValue
             let queryRecordFields = queryNotification.recordFields
             if let recordID = queryNotification.recordID {
+                let recordName = recordID.recordName
+                let zoneID = recordID.zoneID
                 print ("Cloudkitmanager called on query notification")
                 print ("databaseScope : \(databaseScope.rawValue)")
-                print ("recordID : \(recordID)")
+                print ("recordID : \(recordID), recordName: \(recordName) and finally recordZone: \(zoneID)")
                 print ("query reason: \(queryNotificationReason)")
                 if let queryRecordfields = queryRecordFields {
                     for changedField in queryRecordfields {

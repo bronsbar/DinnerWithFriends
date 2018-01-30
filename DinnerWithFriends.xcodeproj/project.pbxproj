@@ -18,6 +18,7 @@
 		C97AC5912018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC5902018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift */; };
 		C97AC5932018E271005AD3D5 /* ProcessServerPublicDatabaseSubscriptionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC5922018E271005AD3D5 /* ProcessServerPublicDatabaseSubscriptionOperation.swift */; };
 		C9B226AB2017690900B65052 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B226AA2017690900B65052 /* CloudKitManager.swift */; };
+		CC23A209201F659200F275CD /* BackGroundPicturesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC23A208201F659200F275CD /* BackGroundPicturesCollectionViewController.swift */; };
 		CC7729BD20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC7729BB20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld */; };
 		CC7729BF20131E1800BDBD13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC7729BE20131E1800BDBD13 /* Assets.xcassets */; };
 		CC7729C220131E1800BDBD13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC7729C020131E1800BDBD13 /* LaunchScreen.storyboard */; };
@@ -56,6 +57,7 @@
 		C97AC5902018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchAllPublicDatabaseSubscriptionsOperation.swift; path = Operations/SubscriptionsOperations/FetchAllPublicDatabaseSubscriptionsOperation.swift; sourceTree = SOURCE_ROOT; };
 		C97AC5922018E271005AD3D5 /* ProcessServerPublicDatabaseSubscriptionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProcessServerPublicDatabaseSubscriptionOperation.swift; path = Operations/SubscriptionsOperations/ProcessServerPublicDatabaseSubscriptionOperation.swift; sourceTree = SOURCE_ROOT; };
 		C9B226AA2017690900B65052 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		CC23A208201F659200F275CD /* BackGroundPicturesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundPicturesCollectionViewController.swift; sourceTree = "<group>"; };
 		CC7729B120131E1800BDBD13 /* DinnerWithFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DinnerWithFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC7729BC20131E1800BDBD13 /* DinnerWithFriends.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DinnerWithFriends.xcdatamodel; sourceTree = "<group>"; };
 		CC7729BE20131E1800BDBD13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				CC7729DE2014922200BDBD13 /* DinnerItemDetailViewController.swift */,
 				CC7729DC2014922200BDBD13 /* DinnerItemTableViewController.swift */,
 				CC7729D3201491E400BDBD13 /* DinnerCreatorViewController.swift */,
+				CC23A208201F659200F275CD /* BackGroundPicturesCollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				CC7729BD20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld in Sources */,
 				C97AC58B20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift in Sources */,
 				CC7729E12014922200BDBD13 /* DinnerDetailCategoryCollectionView.swift in Sources */,
+				CC23A209201F659200F275CD /* BackGroundPicturesCollectionViewController.swift in Sources */,
 				C97AC58E20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift in Sources */,
 				CC7729F52014989600BDBD13 /* DinnerItem.swift in Sources */,
 				CC7729FD20164E2200BDBD13 /* ProcessServerRecordZonesOperation.swift in Sources */,

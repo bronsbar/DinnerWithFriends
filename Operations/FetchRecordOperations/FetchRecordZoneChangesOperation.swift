@@ -24,12 +24,12 @@ class FetchRecordZoneChangesOperation: CKFetchRecordZoneChangesOperation {
     }
     override func main() {
         print ("FetchRecordZoneChangesOperation.main()")
-        lookUpChangeTokenForEachZone()
+        lookUpChangeTokenForEachZone(databaseScope: self.databaseScope, cloudKitZone: self.cloudKitZone)
         setBlocks()
         super.main()
     }
     
-    func lookUpChangeTokenForEachZone() {
+    func lookUpChangeTokenForEachZone(databaseScope: CKDatabaseScope, cloudKitZone: CloudKitZone) {
         
     }
     
