@@ -7,13 +7,34 @@
 //
 
 import UIKit
+import UserNotifications
+import CloudKit
+import CoreData
 
 private let reuseIdentifier = "Cell"
 
-class BackGroundPicturesCollectionViewController: UICollectionViewController {
+class BackGroundPicturesCollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate {
+    
+    var fetchedController: NSFetchedResultsController<BackgroundPictures>!
+    var coreDataStack : CoreDataStack!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let center = NotificationCenter.default
+        let name = Notification.Name("Update Interface")
+        center.addObserver(self, selector: #selector(updateInterface(notification:)), name: name, object: nil)
+        
+        let app = UIApplication.shared
+        let appDelegate = app.delegate as! AppDelegate
+        coreDataStack = appDelegate.coreDataStack
+        
+        let request: NSFetchRequest<BackgroundPictures> = BackgroundPictures.fetchRequest()
+        let sort = NSSortDescriptor(key: "pictureName", ascending: true)
+        request.sortDescriptors = [sort]
+        fetchedController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: coreDataStack.managedContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedController.delegate = self
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -24,9 +45,20 @@ class BackGroundPicturesCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        do {
+            try fetchedController.performFetch()
+            collectionView?.reloadData()
+        } catch {
+            print ("error in viewwill appear reloading collectionViewdata ")
+        }
+    }
+    
+    @objc func updateInterface(notification: Notification) {
+        let main = OperationQueue.main
+        main.addOperation {
+            self.collectionView?.reloadData()
+        }
     }
 
     /*
@@ -42,13 +74,16 @@ class BackGroundPicturesCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+       
         return 0
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
+        if let sections = fetchedController.sections {
+            let sectionInfo = sections[section]
+            return sectionInfo.numberOfObjects
+        }
         return 0
     }
 

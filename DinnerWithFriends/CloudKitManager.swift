@@ -297,8 +297,24 @@ extension CloudKitManager {
 extension CloudKitManager {
     func updateBackgroundPictures(cloudKitZone: CloudKitZone?,databaseScope: CKDatabaseScope, with coreDataStack: CoreDataStack) {
         let fetchDatabaseChangesForCloudKitOperation = FetchDatabaseChangesForCloudKitOperation(cloudKitZone: cloudKitZone, databaseScope: databaseScope)
+        fetchDatabaseChangesForCloudKitOperation.database = container.database(with: databaseScope)
         let fetchRecordZoneChangesOperation = FetchRecordZoneChangesOperation(databaseScope: .public, cloudKitZone: nil, coreDataStack: coreDataStack)
+        fetchRecordZoneChangesOperation.database = container.database(with: databaseScope)
+        let transferDataOperation = BlockOperation {
+            [unowned fetchDatabaseChangesForCloudKitOperation, unowned fetchRecordZoneChangesOperation ] in
+            fetchRecordZoneChangesOperation.changedZoneIDs = fetchDatabaseChangesForCloudKitOperation.changedZoneIDs
+            fetchRecordZoneChangesOperation.fetchOptionsByRecordZoneID = fetchDatabaseChangesForCloudKitOperation.optionsByRecordZoneID
+        }
+        // add dependencies
+        transferDataOperation.addDependency(fetchDatabaseChangesForCloudKitOperation)
+        fetchRecordZoneChangesOperation.addDependency(transferDataOperation)
+        fetchRecordZoneChangesOperation.addDependency(fetchDatabaseChangesForCloudKitOperation)
         
+        // add operations to the queue
+        
+        self.operation.addOperation(fetchDatabaseChangesForCloudKitOperation)
+        self.operation.addOperation(transferDataOperation)
+        self.operation.addOperation(fetchRecordZoneChangesOperation)
     }
 }
 
