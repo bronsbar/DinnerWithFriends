@@ -293,5 +293,14 @@ extension CloudKitManager {
     }
 }
 
+//MARK: -Update BackgroundPictures
+extension CloudKitManager {
+    func updateBackgroundPictures(cloudKitZone: CloudKitZone?,databaseScope: CKDatabaseScope, with coreDataStack: CoreDataStack) {
+        let fetchDatabaseChangesForCloudKitOperation = FetchDatabaseChangesForCloudKitOperation(cloudKitZone: cloudKitZone, databaseScope: databaseScope)
+        let fetchRecordZoneChangesOperation = FetchRecordZoneChangesOperation(databaseScope: .public, cloudKitZone: nil, coreDataStack: coreDataStack)
+        
+    }
+}
+
 
 

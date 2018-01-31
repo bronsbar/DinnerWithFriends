@@ -17,18 +17,17 @@ class FetchDatabaseChangesForCloudKitOperation: CKFetchDatabaseChangesOperation 
     var operationError : Error?
     var serverChangeToken :CKServerChangeToken!
     var serverFetchChangeToken : [CKRecordZoneID :CKServerChangeToken]
-    private let cloudKitZone : CloudKitZone
+    private let cloudKitZone : CloudKitZone?
     private let databaseScope : CKDatabaseScope
-    private let coreDataStack : CoreDataStack
     
-    init(cloudKitZone: CloudKitZone, databaseScope: CKDatabaseScope, coreDataStack:CoreDataStack) {
+    
+    init(cloudKitZone: CloudKitZone?, databaseScope: CKDatabaseScope) {
         self.changedRecords = []
         self.deletedRecordZoneIDs = []
         self.changedZoneIDs = []
         self.optionsByRecordZoneID = [:]
         self.cloudKitZone = cloudKitZone
         self.databaseScope = databaseScope
-        self.coreDataStack = coreDataStack
         self.serverFetchChangeToken = [:]
 
         super.init()
@@ -70,11 +69,7 @@ class FetchDatabaseChangesForCloudKitOperation: CKFetchDatabaseChangesOperation 
                     let options = CKFetchRecordZoneChangesOptions()
                     options.previousServerChangeToken = self.serverFetchChangeToken[zoneID]
                     self.optionsByRecordZoneID[zoneID] = options
-                }
-                let fetchOperation = CKFetchRecordZoneChangesOperation(recordZoneIDs: self.changedZoneIDs, optionsByRecordZoneID: self.optionsByRecordZoneID)
-                fetchOperation.recordChangedBlock = {(record) in }
-                
-                
+                }                
             }
         }
         

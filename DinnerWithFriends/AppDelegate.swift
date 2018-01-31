@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         if !userDefault.exists(key: UserDefaultKeys.subscribedToPublicChanges.rawValue) {
              cloudKitManager.subscribeToPublicDatabase()
         }
-     
+        cloudKitManager.updateBackgroundPictures(cloudKitZone: nil, databaseScope: .public, with: coreDataStack)
         
         
 //        configureCloudKit()
