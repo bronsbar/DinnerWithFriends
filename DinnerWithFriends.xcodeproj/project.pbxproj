@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C96D1D3020221897004CD179 /* BackgroundPictureQueryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96D1D2F20221897004CD179 /* BackgroundPictureQueryOperation.swift */; };
 		C972DF20201B30AD00ED97BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF1F201B30AD00ED97BF /* AppDelegate.swift */; };
 		C972DF23201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF22201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift */; };
 		C972DF25201C664100ED97BF /* FetchRecordZoneChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF24201C664100ED97BF /* FetchRecordZoneChangesOperation.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C96D1D2F20221897004CD179 /* BackgroundPictureQueryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundPictureQueryOperation.swift; sourceTree = "<group>"; };
 		C972DF1F201B30AD00ED97BF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C972DF22201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDatabaseChangesForCloudKitOperation.swift; sourceTree = "<group>"; };
 		C972DF24201C664100ED97BF /* FetchRecordZoneChangesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecordZoneChangesOperation.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			children = (
 				C972DF22201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift */,
 				C972DF24201C664100ED97BF /* FetchRecordZoneChangesOperation.swift */,
+				C96D1D2F20221897004CD179 /* BackgroundPictureQueryOperation.swift */,
 			);
 			path = FetchRecordOperations;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				CC7729F02014966500BDBD13 /* Dinners+CoreDataProperties.swift in Sources */,
 				CC7729D6201491E400BDBD13 /* DinnerItemCollectionViewCell.swift in Sources */,
 				CC7729F720162DF400BDBD13 /* FetchAllRecordZonesOperation.swift in Sources */,
+				C96D1D3020221897004CD179 /* BackgroundPictureQueryOperation.swift in Sources */,
 				CC7729ED2014966500BDBD13 /* DinnerItems+CoreDataClass.swift in Sources */,
 				C972DF23201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift in Sources */,
 				C9745B9D201E1F6200C34A97 /* BackgroundPictures+CoreDataProperties.swift in Sources */,
