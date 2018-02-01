@@ -11,7 +11,7 @@ import CloudKit
 
 enum CloudKitZone: String {
     case dinnerItemsZone = "dinnerItemsZone"
-    case backgroundPicture = "backgroundPicture"
+    case backgroundPicture = "backgroundPictureZone"
    
     
     static let allCloudKitZoneNames = [CloudKitZone.dinnerItemsZone.rawValue, CloudKitZone.backgroundPicture.rawValue]
@@ -62,6 +62,15 @@ enum UserDefaultKeys : String {
     case subscribedToPublicChanges = "subscribedToPublicChanges"
     case publicServerChangeToken = "publicServerChangeToken"
     case publicServerFetchChangeToken = "publicServerFetchChangeToken"
+    case privateServerChangeToken = "privateServerChangeToken"
+    case backgroundPicturesZoneChangeToken = "backgroundPicturesZoneChangeToken"
+    case dinnerItemsZoneChangeToken = "dinnerItemsZoneChangeToken"
+    
+}
+
+enum ChangeTokenType : String {
+    case databaseChangeToken = "databaseChangeToken"
+    case zoneChangeToken = "zoneChangeToken"
 }
 
 extension UserDefaults {
