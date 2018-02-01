@@ -746,13 +746,27 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="czK-lO-0HK">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="czK-lO-0HK" customClass="BackgroundPictureCollectionViewCell" customModule="DinnerWithFriends" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="POC-U3-pLj">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        </imageView>
+                                    </subviews>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="POC-U3-pLj" secondAttribute="trailing" id="QPU-wT-68I"/>
+                                    <constraint firstItem="POC-U3-pLj" firstAttribute="top" secondItem="czK-lO-0HK" secondAttribute="top" id="SNS-rJ-NPR"/>
+                                    <constraint firstItem="POC-U3-pLj" firstAttribute="leading" secondItem="czK-lO-0HK" secondAttribute="leading" id="Utf-xf-WN3"/>
+                                    <constraint firstAttribute="bottom" secondItem="POC-U3-pLj" secondAttribute="bottom" id="g4g-K7-0MR"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="backgroundPicture" destination="POC-U3-pLj" id="mkP-MT-0Mr"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>

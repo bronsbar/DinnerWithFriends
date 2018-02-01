@@ -75,23 +75,31 @@ class BackGroundPicturesCollectionViewController: UICollectionViewController, NS
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
        
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let sections = fetchedController.sections {
             let sectionInfo = sections[section]
+            print("number of objects in backgroundpicture collectionview \(sectionInfo.numberOfObjects)")
             return sectionInfo.numberOfObjects
-        }
+        } else {
         return 0
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BackgroundPictureCollectionViewCell
     
         // Configure the cell
-    
+        
+        let backgroundPicture = fetchedController.object(at: indexPath)
+        
+        if let backgroundPictureData = backgroundPicture.picture {
+            let backgroundPictureImage = UIImage(data: backgroundPictureData as Data)
+            cell.backgroundPicture.image = backgroundPictureImage
+        }
         return cell
     }
 

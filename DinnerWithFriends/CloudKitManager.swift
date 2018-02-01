@@ -295,15 +295,21 @@ extension CloudKitManager {
 
 //MARK: -Update BackgroundPictures
 extension CloudKitManager {
-    func updateBackgroundPictures(cloudKitZone: CloudKitZone?,databaseScope: CKDatabaseScope, with coreDataStack: CoreDataStack) {
+    func updateBackgroundPictures(cloudKitZone: CloudKitZone,databaseScope: CKDatabaseScope, with coreDataStack: CoreDataStack) {
+        // set operation to fetch the databasechanges
         let fetchDatabaseChangesForCloudKitOperation = FetchDatabaseChangesForCloudKitOperation(cloudKitZone: cloudKitZone, databaseScope: databaseScope)
         fetchDatabaseChangesForCloudKitOperation.database = container.database(with: databaseScope)
-        let fetchRecordZoneChangesOperation = FetchRecordZoneChangesOperation(databaseScope: .public, cloudKitZone: nil, coreDataStack: coreDataStack)
+        
+        // set operation the fetch the record changes
+        let fetchRecordZoneChangesOperation = FetchRecordZoneChangesOperation(databaseScope: databaseScope, cloudKitZone: cloudKitZone, coreDataStack: coreDataStack)
         fetchRecordZoneChangesOperation.database = container.database(with: databaseScope)
+        
+        // set operation to transfer data between both operations
         let transferDataOperation = BlockOperation {
             [unowned fetchDatabaseChangesForCloudKitOperation, unowned fetchRecordZoneChangesOperation ] in
             fetchRecordZoneChangesOperation.changedZoneIDs = fetchDatabaseChangesForCloudKitOperation.changedZoneIDs
             fetchRecordZoneChangesOperation.fetchOptionsByRecordZoneID = fetchDatabaseChangesForCloudKitOperation.optionsByRecordZoneID
+            fetchRecordZoneChangesOperation.serverChangeToken = fetchDatabaseChangesForCloudKitOperation.serverChangeToken
         }
         // add dependencies
         transferDataOperation.addDependency(fetchDatabaseChangesForCloudKitOperation)

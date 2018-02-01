@@ -11,10 +11,10 @@ import CloudKit
 
 enum CloudKitZone: String {
     case dinnerItemsZone = "dinnerItemsZone"
-    case backgroundPicture = "backgroundPictureZone"
+    case backgroundPictureZone = "backgroundPictureZone"
    
     
-    static let allCloudKitZoneNames = [CloudKitZone.dinnerItemsZone.rawValue, CloudKitZone.backgroundPicture.rawValue]
+    static let allCloudKitZoneNames = [CloudKitZone.dinnerItemsZone.rawValue, CloudKitZone.backgroundPictureZone.rawValue]
     
     func recordZoneID() -> CKRecordZoneID {
         return CKRecordZoneID(zoneName: self.rawValue, ownerName: CKCurrentUserDefaultName)
