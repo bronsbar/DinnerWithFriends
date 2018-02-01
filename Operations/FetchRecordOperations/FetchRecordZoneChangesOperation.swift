@@ -79,6 +79,9 @@ class FetchRecordZoneChangesOperation: CKFetchRecordZoneChangesOperation {
                 center.post(name: name, object: nil, userInfo: nil)
                 
             }
+            if error != nil {
+                print ("error in fetch record zone changes completion block: \(error)")
+            }
         }
     }
     

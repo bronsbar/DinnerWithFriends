@@ -303,6 +303,7 @@ extension CloudKitManager {
         // set operation the fetch the record changes
         let fetchRecordZoneChangesOperation = FetchRecordZoneChangesOperation(databaseScope: databaseScope, cloudKitZone: cloudKitZone, coreDataStack: coreDataStack)
         fetchRecordZoneChangesOperation.database = container.database(with: databaseScope)
+      
         
         // set operation to transfer data between both operations
         let transferDataOperation = BlockOperation {
