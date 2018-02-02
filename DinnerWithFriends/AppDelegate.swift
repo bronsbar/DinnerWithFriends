@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
     lazy var coreDataStack = CoreDataStack(modelName: "DinnerWithFriends")
     
-    var dinnerPictures :[UIImage] = []
+//    var dinnerPictures :[UIImage] = []
     let cloudKitManager = CloudKitManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -63,8 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 //        configureCloudKit()
         // if Core Data is empty, import the dinnerItems from Cloudkit
         importCloudKitDataIfNeeded(toUpdate: viewController)
-        importCloudKitImages()
-        checkBackgroundPicturesPresent()
 //        subscribeToChangeNotifications()
         print(NSHomeDirectory())
         
@@ -141,23 +139,6 @@ extension AppDelegate {
         }
     }
     
-    private func importCloudKitImages() {
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: "BackgroundPicture", predicate: predicate)
-        let operation = CKQueryOperation(query: query)
-        operation.recordFetchedBlock = { record in
-            if let asset = record.object(forKey: "picture") as? CKAsset,
-                let data = NSData(contentsOf: asset.fileURL),
-                let image = UIImage(data: data as Data) {
-                self.dinnerPictures.append(image)
-                print(self.dinnerPictures.count)
-            }
-            
-        }
-        
-        cloudKitManager.container.publicCloudDatabase.add(operation)
-    }
-    
     private func importCloudKitDataIfNeeded(toUpdate viewController: DinnerItemTableViewController) {
         
         let fetchRequest: NSFetchRequest<DinnerItems> = DinnerItems.fetchRequest()
@@ -209,15 +190,6 @@ extension AppDelegate {
         }
         
         cloudKitManager.container.privateCloudDatabase.add(operation)
-    }
-    private func checkBackgroundPicturesPresent() {
-        let fetchRequest : NSFetchRequest<BackgroundPictures> = BackgroundPictures.fetchRequest()
-        let count = try? coreDataStack.managedContext.count(for: fetchRequest)
-        if let backgroundPicturescount = count, backgroundPicturescount == 0 {
-            print( "there are no pictures present")
-        } else {
-            print("pictures present")
-        }
     }
 }
 

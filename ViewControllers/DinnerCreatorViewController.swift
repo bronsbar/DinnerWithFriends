@@ -31,7 +31,7 @@ class DinnerCreatorViewController: UIViewController{
     var menuItems = ["friendsIcon", "dinnerItemIcon", "wineIcon", "dessertsIcon","searchIcon"]
     // coreDataStack initialized from AppDelegate
     var coreDataStack : CoreDataStack!
-    // fetchedResultsController
+    // DinnerItems fetchedResultsController
     lazy var fetchedResultsController: NSFetchedResultsController<DinnerItems> = {
         let fetchRequest: NSFetchRequest<DinnerItems> = DinnerItems.fetchRequest()
         let sort = NSSortDescriptor(key: #keyPath(DinnerItems.name), ascending: true)
@@ -40,6 +40,19 @@ class DinnerCreatorViewController: UIViewController{
         fetchedResultsController.delegate = self
         return fetchedResultsController
     }()
+    // BackgroundPictures fetchedResultsController
+    lazy var backgroundPicturesfetchedResultsController: NSFetchedResultsController<BackgroundPictures> = {
+        let fetchRequest: NSFetchRequest<BackgroundPictures> = BackgroundPictures.fetchRequest()
+        let sort = NSSortDescriptor(key: #keyPath(BackgroundPictures.pictureName), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: coreDataStack.managedContext, sectionNameKeyPath: nil, cacheName: "BackgroundPictures")
+        fetchedResultsController.delegate = self
+        return fetchedResultsController
+    }()
+    
+    
+    
+    
     // array of BlockOperations to execute multiple changes in nsfetchedresultscontroller, used in the extension delegate for nsfetchedresultscontroller
     var blockOperation = [BlockOperation]()
     
@@ -67,14 +80,8 @@ class DinnerCreatorViewController: UIViewController{
         // assign menubar delegate and datasource
         menuBarCollectionView.delegate = self
         menuBarCollectionView.dataSource = self
-     
-        
-        
-        
-    
     
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -121,11 +128,23 @@ class DinnerCreatorViewController: UIViewController{
             self.view.layoutIfNeeded()
         }
     }
-   private func loadRandomBackgroundPicture() {
-    let maxNumber = delegate.dinnerPictures.count
-    let randomNumber = arc4random_uniform(UInt32(maxNumber))
-    backgroundPicture.image = delegate.dinnerPictures[Int(randomNumber)]
-    
+    private func loadRandomBackgroundPicture() {
+        
+        do {
+            try backgroundPicturesfetchedResultsController.performFetch()
+        } catch  {
+            print("error in fetching the backgroundPictures from CoreData")
+        }
+        
+        if let maxNumber = backgroundPicturesfetchedResultsController.fetchedObjects?.count
+        {
+            let randomNumber = arc4random_uniform(UInt32(maxNumber))
+            let selectedBackgroundPictureData = backgroundPicturesfetchedResultsController.fetchedObjects![Int(randomNumber)].picture
+            
+            backgroundPicture.image = UIImage(data: selectedBackgroundPictureData! as Data)
+        }
+        
+        
     }
 }
 
