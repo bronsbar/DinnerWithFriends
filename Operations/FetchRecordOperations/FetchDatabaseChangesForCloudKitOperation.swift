@@ -63,6 +63,9 @@ class FetchDatabaseChangesForCloudKitOperation: CKFetchDatabaseChangesOperation 
                     return
                 }
                 self.serverChangeToken = token
+                // Flush in-memory database change token to disk
+                print("flushing database change token to disk: \(String(describing: self.serverChangeToken?.description))")
+                self.setServerChangeToken(databaseScope: self.databaseScope, cloudKitZone: .backgroundPictureZone, changeTokenType:.databaseChangeToken, serverChangeToken: self.serverChangeToken)
                 // populate optionsByRecordZoneID with ZoneChangeTokens on disk
                 for zoneID in self.changedZoneIDs {
                     let options = CKFetchRecordZoneChangesOptions()

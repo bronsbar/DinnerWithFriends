@@ -307,7 +307,7 @@ extension CloudKitManager {
         
         // set operation to transfer data between both operations
         let transferDataOperation = BlockOperation {
-            [unowned fetchDatabaseChangesForCloudKitOperation, unowned fetchRecordZoneChangesOperation ] in
+            [unowned fetchDatabaseChangesForCloudKitOperation,  fetchRecordZoneChangesOperation ] in
             fetchRecordZoneChangesOperation.changedZoneIDs = fetchDatabaseChangesForCloudKitOperation.changedZoneIDs
             fetchRecordZoneChangesOperation.fetchOptionsByRecordZoneID = fetchDatabaseChangesForCloudKitOperation.optionsByRecordZoneID
             fetchRecordZoneChangesOperation.serverChangeToken = fetchDatabaseChangesForCloudKitOperation.serverChangeToken
@@ -321,7 +321,9 @@ extension CloudKitManager {
         
         self.operation.addOperation(fetchDatabaseChangesForCloudKitOperation)
         self.operation.addOperation(transferDataOperation)
+        if !fetchDatabaseChangesForCloudKitOperation.changedZoneIDs.isEmpty {
         self.operation.addOperation(fetchRecordZoneChangesOperation)
+        }
     }
 }
 

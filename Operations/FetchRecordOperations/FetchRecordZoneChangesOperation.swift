@@ -49,6 +49,7 @@ class FetchRecordZoneChangesOperation: CKFetchRecordZoneChangesOperation {
         }
         recordWithIDWasDeletedBlock = {(recordID,recordType) in
             self.deletedRecords.append(recordID)
+            print("records to delete : \(recordID.recordName)")
            
         }
         recordZoneChangeTokensUpdatedBlock = { (zoneId, token, data) in
@@ -71,8 +72,7 @@ class FetchRecordZoneChangesOperation: CKFetchRecordZoneChangesOperation {
         }
         fetchRecordZoneChangesCompletionBlock = { (error) in
             if error ==  nil {
-                // Flush in-memory database change token to disk
-                self.setServerChangeToken(databaseScope: self.databaseScope, cloudKitZone: .backgroundPictureZone, changeTokenType:.zoneChangeToken, serverChangeToken: self.serverChangeToken)
+                
                 // send a notification that an update is available
                 let center = NotificationCenter.default
                 let name = Notification.Name("Update Interface")
