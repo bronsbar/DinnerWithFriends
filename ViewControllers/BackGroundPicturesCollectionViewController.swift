@@ -57,7 +57,12 @@ class BackGroundPicturesCollectionViewController: UICollectionViewController, NS
     @objc func updateInterface(notification: Notification) {
         let main = OperationQueue.main
         main.addOperation {
-            self.collectionView?.reloadData()
+            do {
+                try self.fetchedController.performFetch()
+                self.collectionView?.reloadData()
+            } catch {
+                print ("error in updateInterface after notification")
+            }
         }
     }
 

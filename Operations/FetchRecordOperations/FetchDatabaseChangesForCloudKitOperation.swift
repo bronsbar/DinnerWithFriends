@@ -20,21 +20,21 @@ class FetchDatabaseChangesForCloudKitOperation: CKFetchDatabaseChangesOperation 
     private let databaseScope : CKDatabaseScope
     
     
-    init(cloudKitZone: CloudKitZone, databaseScope: CKDatabaseScope) {
+    init(cloudKitZone: CloudKitZone, databaseScope: CKDatabaseScope, serverChangeToken: CKServerChangeToken?) {
         self.deletedRecordZoneIDs = []
         self.changedZoneIDs = []
         self.optionsByRecordZoneID = [:]
         self.cloudKitZone = cloudKitZone
         self.databaseScope = databaseScope
-        
+        self.serverChangeToken = serverChangeToken
         
         super.init()
-        self.serverChangeToken = self.getServerChangeToken(databaseScope: databaseScope, cloudKitZone: cloudKitZone, changeTokenType: .databaseChangeToken)
-        self.previousServerChangeToken = self.serverChangeToken
+        
         
     }
     override func main() {
         print ("FetchDatabaseChangesForCloudKitOperation.main()")
+        self.previousServerChangeToken = self.serverChangeToken
         setBlocks()
         super.main()
     }

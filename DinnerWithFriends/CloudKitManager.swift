@@ -281,7 +281,7 @@ extension CloudKitManager {
 // MARK: -Sync changes in CloudKit Locally
 
 extension CloudKitManager {
-    func synZone(notification: CKNotification , completionBlockOperation: BlockOperation) {
+    func synZone(notification: CKNotification , completionBlockOperation: BlockOperation, coreDataStack: CoreDataStack) {
         
         switch notification.notificationType {
         case .query :
@@ -312,6 +312,7 @@ extension CloudKitManager {
                 print ("Cloudkitmanger called on zone change notification")
                 print ("databaseScope : \(databaseScope.rawValue)")
                 print ("recordzoneID : \(recordZoneID)")
+                self.updateBackgroundPictures(cloudKitZone: .backgroundPictureZone, databaseScope: databaseScope, with: coreDataStack)
                 operation.addOperation(completionBlockOperation)
             }
         default :
@@ -323,8 +324,23 @@ extension CloudKitManager {
 //MARK: -Update BackgroundPictures
 extension CloudKitManager {
     func updateBackgroundPictures(cloudKitZone: CloudKitZone,databaseScope: CKDatabaseScope, with coreDataStack: CoreDataStack) {
+        
+        print ("updateBackgroundPictures operation: Start")
+        var serverChangeToken: CKServerChangeToken?
         // create an operation to fetch the zonesIDs that have changes
-        let fetchDatabaseChangesForCloudKitOperation = FetchDatabaseChangesForCloudKitOperation(cloudKitZone: cloudKitZone, databaseScope: databaseScope)
+        // Fetch the serverChangeToken from disk
+        if UserDefaults.standard.exists(key: UserDefaultKeys.privateServerChangeToken.rawValue) {
+            if let encodedObjectData = UserDefaults.standard.object(forKey: UserDefaultKeys.privateServerChangeToken.rawValue) as? Data
+            {
+                serverChangeToken = NSKeyedUnarchiver.unarchiveObject(with: encodedObjectData) as? CKServerChangeToken
+                print ("current serverChangeToken is :\(String(describing: serverChangeToken?.description))")
+            }
+        } else {
+            serverChangeToken = nil
+            print ("current serverChangeToken is nil")
+        }
+        
+        let fetchDatabaseChangesForCloudKitOperation = FetchDatabaseChangesForCloudKitOperation(cloudKitZone: cloudKitZone, databaseScope: databaseScope, serverChangeToken: serverChangeToken)
         fetchDatabaseChangesForCloudKitOperation.database = container.database(with: databaseScope)
         
         // set operation the fetch the record changes
@@ -334,7 +350,7 @@ extension CloudKitManager {
         
         // set operation to transfer data between both operations
         let transferDataOperation = BlockOperation {
-            [unowned fetchDatabaseChangesForCloudKitOperation,  fetchRecordZoneChangesOperation ] in
+            [unowned fetchDatabaseChangesForCloudKitOperation,  unowned fetchRecordZoneChangesOperation ] in
             fetchRecordZoneChangesOperation.changedZoneIDs = fetchDatabaseChangesForCloudKitOperation.changedZoneIDs
             fetchRecordZoneChangesOperation.fetchOptionsByRecordZoneID = fetchDatabaseChangesForCloudKitOperation.optionsByRecordZoneID
             fetchRecordZoneChangesOperation.serverChangeToken = fetchDatabaseChangesForCloudKitOperation.serverChangeToken
@@ -348,9 +364,11 @@ extension CloudKitManager {
         
         self.operation.addOperation(fetchDatabaseChangesForCloudKitOperation)
         self.operation.addOperation(transferDataOperation)
-        if !fetchDatabaseChangesForCloudKitOperation.changedZoneIDs.isEmpty {
         self.operation.addOperation(fetchRecordZoneChangesOperation)
-        }
+        
+        
+        
+        print("updateBackgroundPictures operation: End")
     }
 }
 

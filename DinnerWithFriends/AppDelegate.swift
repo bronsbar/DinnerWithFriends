@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             let completionBlockOperation = BlockOperation(block: {
                 completionHandler(UIBackgroundFetchResult.newData)
             })
-            cloudKitManager.synZone(notification: notification, completionBlockOperation: completionBlockOperation)
+            cloudKitManager.synZone(notification: notification, completionBlockOperation: completionBlockOperation, coreDataStack: coreDataStack)
         }
         else {
             completionHandler(UIBackgroundFetchResult.noData)
