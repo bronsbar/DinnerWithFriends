@@ -27,19 +27,14 @@ class FetchAllRecordZonesOperation: CKFetchRecordZonesOperation {
             }
             if let recordZones = recordZones {
                 self.fetchedRecordZones = recordZones
-                for recordID in recordZones.keys {
-                    print(recordID)
+                for recordZonesID in recordZones.keys {
+                    print(recordZonesID)
                 }
                 // set recordZones in UserDefault
                 let recordZonesData = NSKeyedArchiver.archivedData(withRootObject: recordZones)
                 let userDefault = UserDefaults.standard
                 userDefault.set(recordZonesData, forKey: "recordZones")
             }
-            
-            
         }
-        
-        
     }
-    
 }

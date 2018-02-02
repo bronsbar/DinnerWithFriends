@@ -44,13 +44,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         viewController.coreDataStack = coreDataStack
         viewController2.coreDataStack = coreDataStack
         
+        // Initialisation operation: check if cloudKit zones on the server exist
         cloudKitManager.initialisationOperation()
+        
+        // Check if the subscription to Zones exist, if not create them and flush a flag to Disk
         cloudKitManager.subscribeToDatabaseZones()
+        
 //        cloudKitManager.createPublicDatabaseSubscription()
-        let userDefault = UserDefaults.standard
-        if !userDefault.exists(key: UserDefaultKeys.subscribedToPublicChanges.rawValue) {
-             cloudKitManager.subscribeToPublicDatabase()
-        }
+//        let userDefault = UserDefaults.standard
+//        if !userDefault.exists(key: UserDefaultKeys.subscribedToPublicChanges.rawValue) {
+//             cloudKitManager.subscribeToPublicDatabase()
+//        }
+        
+        // Update the backgroundPictures database with changes on the server
         cloudKitManager.updateBackgroundPictures(cloudKitZone: .backgroundPictureZone, databaseScope: .private, with: coreDataStack)
         
         

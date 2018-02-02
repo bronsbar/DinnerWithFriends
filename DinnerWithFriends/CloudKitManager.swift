@@ -16,15 +16,19 @@ class CloudKitManager {
     }()
     let operation = OperationQueue()
     
+    // MARK: - Initialisation Operation:
     func initialisationOperation() {
         
-        // fetch all zones
+        print("initialisation operation started")
+        
+        // create an operation that returns all the record zones in the current database
         let fetchAllRecordZonesOperation = FetchAllRecordZonesOperation.fetchAllRecordZonesOperation()
-        // process the returned zones and create arrays for zones that need creation and those that need deletion
         
+        // create an operatoin to process the returned zones and create arrays for zones that need creation and those that need deletion
         let processServerRecordZonesOperation = ProcessServerRecordZonesOperation()
+        // create an operation to modify the existing zones on the server
         let modifyRecordZonesOperation = self.createModifyRecordZoneOperation(recordZonesToSave: nil, recordZoneIDsToDelete: nil)
-        
+        // create an operation to transfer data from one operation to another
         let transferFetchedZonesOperation = BlockOperation {
             [unowned fetchAllRecordZonesOperation, unowned processServerRecordZonesOperation] in
             if let fetchRecordZones = fetchAllRecordZonesOperation.fetchedRecordZones {
@@ -32,7 +36,7 @@ class CloudKitManager {
             }
             print("TransferFetchedZonesOperation Blockoperation executed")
         }
-        
+        // create an operation to transfer data from one operation to another
         let transferProcessedZonesOperation = BlockOperation {
             [unowned modifyRecordZonesOperation, unowned processServerRecordZonesOperation] in
             modifyRecordZonesOperation.recordZonesToSave = processServerRecordZonesOperation.postProcessRecordZonesToCreate
@@ -56,15 +60,18 @@ class CloudKitManager {
         
         // wait until these operations have finished before the queue can launch next set of operations ( subscriptions)
         modifyRecordZonesOperation.waitUntilFinished()
+        
+        print ("initialisation operation Finished")
         }
     
 
-    
+    // helper function for initialisation Operation
     private func createModifyRecordZoneOperation(recordZonesToSave: [CKRecordZone]?, recordZoneIDsToDelete: [CKRecordZoneID]?) -> CKModifyRecordZonesOperation {
         
         let modifyRecordZonesOperation = CKModifyRecordZonesOperation(recordZonesToSave: recordZonesToSave, recordZoneIDsToDelete: recordZoneIDsToDelete)
+        // completionBlock
         modifyRecordZonesOperation.modifyRecordZonesCompletionBlock = { (modifiedRecordZones, deletedRecordZonesIDs , error) in
-            print ("CKModifyRecordZonesOperation.modifyRecordZonesOperation")
+            print ("CKModifyRecordZonesOperation.completionBlock Start:")
             if let error = error {
                 print("createModifyRecordZoneOperation ERROR: \(error)")
                 return
@@ -79,6 +86,7 @@ class CloudKitManager {
                     print ("Deleted recordZoneIDs \(recordZoneID)")
                 }
             }
+            print ("CKModifyRecordZonesOperation.completionBlock End:")
         }
         return modifyRecordZonesOperation
     }
@@ -87,25 +95,39 @@ class CloudKitManager {
 extension CloudKitManager {
     
     func subscribeToDatabaseZones() {
+        
+        // check if already subscribed flag is set to true
+        let userDefault = UserDefaults.standard
+        guard !userDefault.exists(key: UserDefaultKeys.subscribedToDatabaseChanges.rawValue) else {
+            print("subscriptions to databaseChanges do already exist")
+            return
+        }
+        // continue the subscription to the databaseZones
+        print("Subscribe to databaseZones process: Start")
         // 1. fetch all subscriptions
         // 2. process those that need to be created and those that need to be deleted
         // 3. Make the adjustment in the Cloud
         
+        // create an operation to fetch all the zonesubscriptions from the server
         let fetchAllSubscriptionOperation = FetchAllSubscriptionsOperation.fetchAllSubscriptionsOperation()
+        // create an operation to compare the existing zonessubscriptions with the defined CloudKitZones
         let processServerSubscriptionOperation = ProcessServerSubscriptionOperation()
+        
+        // create an operation to update the subscriptions on the server
         let modifySubscriptionOperation = self.createModifySubscriptionOperation()
         
+        // create an operation to transfer data from one operation to another
         let transferFetchedSubscriptionOperation = BlockOperation {
             [unowned processServerSubscriptionOperation, unowned fetchAllSubscriptionOperation ] in
             processServerSubscriptionOperation.preProcessedFetchedSubscriptions = fetchAllSubscriptionOperation.fetchedSubscriptions
         }
-        
+        // create an operation to transfer data from one operation to another
         let transferProcessedSubscriptionOperation = BlockOperation {
             [unowned modifySubscriptionOperation, unowned processServerSubscriptionOperation] in
             modifySubscriptionOperation.subscriptionsToSave = processServerSubscriptionOperation.postProcessSubscriptionsToCreate
             modifySubscriptionOperation.subscriptionIDsToDelete = processServerSubscriptionOperation.postProcessSubscriptionsToDelete
         }
-        // dependencies
+        // Add dependencies
         transferFetchedSubscriptionOperation.addDependency(fetchAllSubscriptionOperation)
         processServerSubscriptionOperation.addDependency(transferFetchedSubscriptionOperation)
         transferProcessedSubscriptionOperation.addDependency(processServerSubscriptionOperation)
@@ -119,6 +141,10 @@ extension CloudKitManager {
         self.operation.addOperation(transferProcessedSubscriptionOperation)
         self.operation.addOperation(modifySubscriptionOperation)
         
+        // wait until all operations are done:
+        modifySubscriptionOperation.waitUntilFinished()
+        
+        print("Subscribe to databaseZones process: End")
     }
     
     private func createModifySubscriptionOperation() -> CKModifySubscriptionsOperation {
@@ -141,6 +167,7 @@ extension CloudKitManager {
                     print ("Deleted subscriptionIDs : \(subscriptionID)")
                 }
             }
+             UserDefaults.standard.set(true, forKey: UserDefaultKeys.subscribedToDatabaseChanges.rawValue)
         }
         return modifySubscriptionOperation
     }
@@ -296,7 +323,7 @@ extension CloudKitManager {
 //MARK: -Update BackgroundPictures
 extension CloudKitManager {
     func updateBackgroundPictures(cloudKitZone: CloudKitZone,databaseScope: CKDatabaseScope, with coreDataStack: CoreDataStack) {
-        // set operation to fetch the databasechanges
+        // create an operation to fetch the zonesIDs that have changes
         let fetchDatabaseChangesForCloudKitOperation = FetchDatabaseChangesForCloudKitOperation(cloudKitZone: cloudKitZone, databaseScope: databaseScope)
         fetchDatabaseChangesForCloudKitOperation.database = container.database(with: databaseScope)
         
