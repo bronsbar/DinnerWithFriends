@@ -312,7 +312,7 @@ extension CloudKitManager {
                 print ("Cloudkitmanger called on zone change notification")
                 print ("databaseScope : \(databaseScope.rawValue)")
                 print ("recordzoneID : \(recordZoneID)")
-                self.updateBackgroundPictures(cloudKitZone: .backgroundPictureZone, databaseScope: databaseScope, with: coreDataStack)
+                self.updateLocalCache(databaseScope: databaseScope, with: coreDataStack)
                 operation.addOperation(completionBlockOperation)
             }
         default :
@@ -321,11 +321,11 @@ extension CloudKitManager {
     }
 }
 
-//MARK: -Update BackgroundPictures
+//MARK: -Update the local cache
 extension CloudKitManager {
-    func updateBackgroundPictures(cloudKitZone: CloudKitZone,databaseScope: CKDatabaseScope, with coreDataStack: CoreDataStack) {
+    func updateLocalCache(databaseScope: CKDatabaseScope, with coreDataStack: CoreDataStack) {
         
-        print ("updateBackgroundPictures operation: Start")
+        print ("updatelocalcache operation: Start")
         var serverChangeToken: CKServerChangeToken?
         // create an operation to fetch the zonesIDs that have changes
         // Fetch the serverChangeToken from disk
@@ -340,11 +340,11 @@ extension CloudKitManager {
             print ("current serverChangeToken is nil")
         }
         
-        let fetchDatabaseChangesForCloudKitOperation = FetchDatabaseChangesForCloudKitOperation(cloudKitZone: cloudKitZone, databaseScope: databaseScope, serverChangeToken: serverChangeToken)
+        let fetchDatabaseChangesForCloudKitOperation = FetchDatabaseChangesForCloudKitOperation(databaseScope: databaseScope, serverChangeToken: serverChangeToken)
         fetchDatabaseChangesForCloudKitOperation.database = container.database(with: databaseScope)
         
         // set operation the fetch the record changes
-        let fetchRecordZoneChangesOperation = FetchRecordZoneChangesOperation(databaseScope: databaseScope, cloudKitZone: cloudKitZone, coreDataStack: coreDataStack)
+        let fetchRecordZoneChangesOperation = FetchRecordZoneChangesOperation(databaseScope: databaseScope, coreDataStack: coreDataStack)
         fetchRecordZoneChangesOperation.database = container.database(with: databaseScope)
       
         
@@ -367,8 +367,7 @@ extension CloudKitManager {
         self.operation.addOperation(fetchRecordZoneChangesOperation)
         
         
-        
-        print("updateBackgroundPictures operation: End")
+        print("updatelocalcatch operation: End")
     }
 }
 

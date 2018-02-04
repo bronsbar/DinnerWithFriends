@@ -16,15 +16,13 @@ class FetchDatabaseChangesForCloudKitOperation: CKFetchDatabaseChangesOperation 
     var operationError : Error?
     var serverChangeToken :CKServerChangeToken?
     
-    private let cloudKitZone : CloudKitZone
     private let databaseScope : CKDatabaseScope
     
     
-    init(cloudKitZone: CloudKitZone, databaseScope: CKDatabaseScope, serverChangeToken: CKServerChangeToken?) {
+    init(databaseScope: CKDatabaseScope, serverChangeToken: CKServerChangeToken?) {
         self.deletedRecordZoneIDs = []
         self.changedZoneIDs = []
         self.optionsByRecordZoneID = [:]
-        self.cloudKitZone = cloudKitZone
         self.databaseScope = databaseScope
         self.serverChangeToken = serverChangeToken
         
@@ -88,7 +86,7 @@ class FetchDatabaseChangesForCloudKitOperation: CKFetchDatabaseChangesOperation 
         
         // MARK: - Change token, user defaults methods
         
-        func getServerChangeToken(databaseScope : CKDatabaseScope, cloudKitZone: CloudKitZone, changeTokenType: ChangeTokenType) -> CKServerChangeToken? {
+        func getServerChangeToken(databaseScope : CKDatabaseScope, cloudKitZone: CloudKitZone?, changeTokenType: ChangeTokenType) -> CKServerChangeToken? {
             let userDefault = UserDefaults.standard
             var serverChangeToken : CKServerChangeToken?
             if databaseScope == .private && changeTokenType == .databaseChangeToken {
@@ -98,7 +96,7 @@ class FetchDatabaseChangesForCloudKitOperation: CKFetchDatabaseChangesOperation 
                 } else { serverChangeToken = nil}
             }
             if databaseScope == .private && changeTokenType == .zoneChangeToken {
-                switch cloudKitZone {
+                switch cloudKitZone! {
                 case .backgroundPictureZone:
                     if let encodedObjectData = userDefault.object(forKey: UserDefaultKeys.backgroundPicturesZoneChangeToken.rawValue) as? Data
                     {
@@ -114,7 +112,7 @@ class FetchDatabaseChangesForCloudKitOperation: CKFetchDatabaseChangesOperation 
             return serverChangeToken
         }
         
-        func setServerChangeToken(databaseScope : CKDatabaseScope, cloudKitZone: CloudKitZone, changeTokenType: ChangeTokenType, serverChangeToken: CKServerChangeToken?) {
+        func setServerChangeToken(databaseScope : CKDatabaseScope, cloudKitZone: CloudKitZone?, changeTokenType: ChangeTokenType, serverChangeToken: CKServerChangeToken?) {
             let userDefault = UserDefaults.standard
             if changeTokenType == .databaseChangeToken && databaseScope == .private {
                 if let serverChangeToken = serverChangeToken {
@@ -125,7 +123,7 @@ class FetchDatabaseChangesForCloudKitOperation: CKFetchDatabaseChangesOperation 
             if databaseScope == .private && changeTokenType == .zoneChangeToken {
                 if let serverChangeToken = serverChangeToken {
                     let encodedObjectData = NSKeyedArchiver.archivedData(withRootObject: serverChangeToken)
-                    switch cloudKitZone {
+                    switch cloudKitZone! {
                     case .backgroundPictureZone:
                         userDefault.set(encodedObjectData, forKey: UserDefaultKeys.backgroundPicturesZoneChangeToken.rawValue)
                     case .dinnerItemsZone:

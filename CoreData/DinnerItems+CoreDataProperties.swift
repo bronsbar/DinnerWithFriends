@@ -20,7 +20,7 @@ extension DinnerItems {
     @NSManaged public var addedDate: NSDate?
     @NSManaged public var category: String?
     @NSManaged public var image: NSData?
-    @NSManaged public var imageTubnail: NSData?
+    @NSManaged public var imageTumbnail: NSData?
     @NSManaged public var lastUpdate: NSDate?
     @NSManaged public var metaData: NSData?
     @NSManaged public var name: String?

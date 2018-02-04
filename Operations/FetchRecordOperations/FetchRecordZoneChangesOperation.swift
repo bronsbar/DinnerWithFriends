@@ -17,13 +17,11 @@ class FetchRecordZoneChangesOperation: CKFetchRecordZoneChangesOperation {
     var deletedRecords : [CKRecordID]
     var serverFetchChangeToken : [CKRecordZoneID :CKServerChangeToken]
     var serverChangeToken : CKServerChangeToken?
-    private let cloudKitZone : CloudKitZone?
     private let databaseScope : CKDatabaseScope
     private let coreDataStack : CoreDataStack
     
-    init(databaseScope: CKDatabaseScope, cloudKitZone: CloudKitZone?, coreDataStack: CoreDataStack) {
+    init(databaseScope: CKDatabaseScope, coreDataStack: CoreDataStack) {
         self.databaseScope = databaseScope
-        self.cloudKitZone = cloudKitZone
         self.coreDataStack = coreDataStack
         self.fetchOptionsByRecordZoneID = [:]
         self.changedZoneIDs = []
@@ -109,7 +107,24 @@ extension FetchRecordZoneChangesOperation {
                 } catch {
                     print("Error in saving to CoreDataContext")
                 }
-                // still to implement changes with other zoneIDs
+            case CloudKitZone.dinnerItemsZone.rawValue :
+                let name = record.recordID.recordName
+                let request: NSFetchRequest<DinnerItems> = DinnerItems.fetchRequest()
+                request.predicate = NSPredicate(format: "recordName = %@", name)
+                do {
+                    let result = try self.coreDataStack.managedContext.fetch(request)
+                    if result.isEmpty {
+                        let dinnerItem = DinnerItems(context: self.coreDataStack.managedContext)
+                       dinnerItem.updateWithRecord(record: record)
+                        try self.coreDataStack.saveContext()
+                    } else {
+                        let dinnerItem = result[0]
+                        dinnerItem.updateWithRecord(record: record)
+                        try self.coreDataStack.saveContext()
+                    }
+                } catch {
+                    print("Error in saving to CoreDataContext")
+                }
             default: break
             }
         }
@@ -118,19 +133,39 @@ extension FetchRecordZoneChangesOperation {
     func flushDeletionsToDisk(zoneId : CKRecordZoneID) {
         for recordID in deletedRecords {
             let name = recordID.recordName
-            let request: NSFetchRequest<BackgroundPictures> = BackgroundPictures.fetchRequest()
-            request.predicate = NSPredicate(format: "recordName = %@", name)
-            do {
-                let result = try self.coreDataStack.managedContext.fetch(request)
-                if !result.isEmpty {
-                    let backgroundPicture = result[0]
-                    self.coreDataStack.managedContext.delete(backgroundPicture)
-                    try self.coreDataStack.saveContext()
+            let zone = recordID.zoneID.zoneName
+            
+            switch zone {
+            case CloudKitZone.backgroundPictureZone.rawValue:
+                let request: NSFetchRequest<BackgroundPictures> = BackgroundPictures.fetchRequest()
+                request.predicate = NSPredicate(format: "recordName = %@", name)
+                do {
+                    let result = try self.coreDataStack.managedContext.fetch(request)
+                    if !result.isEmpty {
+                        let backgroundPicture = result[0]
+                        self.coreDataStack.managedContext.delete(backgroundPicture)
+                        try self.coreDataStack.saveContext()
+                    }
+                } catch {
+                    print ("error in deleting core Data object")
                 }
-            } catch {
-                print ("error in deleting core Data object")
+            case CloudKitZone.dinnerItemsZone.rawValue:
+                let request: NSFetchRequest<DinnerItems> = DinnerItems.fetchRequest()
+                request.predicate = NSPredicate(format: "recordName = %@", name)
+                do {
+                    let result = try self.coreDataStack.managedContext.fetch(request)
+                    if !result.isEmpty {
+                        let dinnerItem = result[0]
+                        self.coreDataStack.managedContext.delete(dinnerItem)
+                        try self.coreDataStack.saveContext()
+                    }
+                } catch {
+                    print ("error in deleting core Data object")
+                }
+            default : break
             }
-        }
+    
        deletedRecords = []
     }
+}
 }

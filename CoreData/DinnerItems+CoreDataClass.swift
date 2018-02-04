@@ -72,7 +72,16 @@ final public class DinnerItems: NSManagedObject {
         return imageData
     }
     
-    
+func updateWithRecord(record: CKRecord) {
+    self.name = record["name"] as? String
+    self.lastUpdate = record["lastUpdate"] as? NSDate
+    self.recordName = record.recordID.recordName
+    self.recordID = NSKeyedArchiver.archivedData(withRootObject: record.recordID) as NSData
+    if let asset = record.object(forKey: "image") as? CKAsset,
+        let data = NSData(contentsOf: asset.fileURL) {
+        self.image = data
+    }
+}
 }
 
 // extension on CKRecord to convert a property of type CKAsset into a UIImage

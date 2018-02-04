@@ -56,8 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 //             cloudKitManager.subscribeToPublicDatabase()
 //        }
         
-        // Update the backgroundPictures database with changes on the server
-        cloudKitManager.updateBackgroundPictures(cloudKitZone: .backgroundPictureZone, databaseScope: .private, with: coreDataStack)
+        // Update the local database with changes on the  CloudKit server
+        cloudKitManager.updateLocalCache(databaseScope: .private, with: coreDataStack)
+        
         
         
 //        configureCloudKit()
