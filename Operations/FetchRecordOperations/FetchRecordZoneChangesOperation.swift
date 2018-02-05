@@ -33,10 +33,13 @@ class FetchRecordZoneChangesOperation: CKFetchRecordZoneChangesOperation {
     }
     override func main() {
         print ("FetchRecordZoneChangesOperation.main()")
-        self.recordZoneIDs = self.changedZoneIDs
-        self.optionsByRecordZoneID = self.fetchOptionsByRecordZoneID
-        setBlocks()
-        super.main()
+        if !self.changedZoneIDs.isEmpty {
+            self.recordZoneIDs = self.changedZoneIDs
+            self.optionsByRecordZoneID = self.fetchOptionsByRecordZoneID
+            setBlocks()
+            super.main()
+        }
+       
     }
     
     func setBlocks() {

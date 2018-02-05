@@ -15,25 +15,34 @@ private let reuseIdentifier = "Cell"
 
 class BackGroundPicturesCollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate {
     
-    var fetchedController: NSFetchedResultsController<BackgroundPictures>!
+    lazy var fetchedController: NSFetchedResultsController<BackgroundPictures> = {
+        let fetchRequest: NSFetchRequest<BackgroundPictures> = BackgroundPictures.fetchRequest()
+        let sort = NSSortDescriptor(key: "pictureName", ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: coreDataStack.managedContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchResultsController.delegate = self
+        return fetchResultsController
+    }()
+    
     var coreDataStack : CoreDataStack!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let center = NotificationCenter.default
-        let name = Notification.Name("Update Interface")
-        center.addObserver(self, selector: #selector(updateInterface(notification:)), name: name, object: nil)
-        
+//        let center = NotificationCenter.default
+//        let name = Notification.Name("Update Interface")
+//        center.addObserver(self, selector: #selector(updateInterface(notification:)), name: name, object: nil)
+//
         let app = UIApplication.shared
         let appDelegate = app.delegate as! AppDelegate
         coreDataStack = appDelegate.coreDataStack
         
-        let request: NSFetchRequest<BackgroundPictures> = BackgroundPictures.fetchRequest()
-        let sort = NSSortDescriptor(key: "pictureName", ascending: true)
-        request.sortDescriptors = [sort]
-        fetchedController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: coreDataStack.managedContext, sectionNameKeyPath: nil, cacheName: nil)
-        fetchedController.delegate = self
+        
+        do {
+            try fetchedController.performFetch()
+        } catch let error as NSError {
+            print ("Fetching error: \(error), \(error.userInfo)")
+        }
         
 
         // Uncomment the following line to preserve selection between presentations
@@ -46,25 +55,21 @@ class BackGroundPicturesCollectionViewController: UICollectionViewController, NS
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        do {
-            try fetchedController.performFetch()
-            collectionView?.reloadData()
-        } catch {
-            print ("error in viewwill appear reloading collectionViewdata ")
-        }
+        
+        collectionView?.reloadData()
     }
     
-    @objc func updateInterface(notification: Notification) {
-        let main = OperationQueue.main
-        main.addOperation {
-            do {
-                try self.fetchedController.performFetch()
-                self.collectionView?.reloadData()
-            } catch {
-                print ("error in updateInterface after notification")
-            }
-        }
-    }
+//    @objc func updateInterface(notification: Notification) {
+//        let main = OperationQueue.main
+//        main.addOperation {
+//            do {
+//                try self.fetchedController.performFetch()
+//                self.collectionView?.reloadData()
+//            } catch {
+//                print ("error in updateInterface after notification")
+//            }
+//        }
+//    }
 
     /*
     // MARK: - Navigation
@@ -80,32 +85,38 @@ class BackGroundPicturesCollectionViewController: UICollectionViewController, NS
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
        
-        return 1
+        guard let sections = fetchedController.sections else {
+            return 0
+        }
+        return sections.count
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let sections = fetchedController.sections {
-            let sectionInfo = sections[section]
-            print("number of objects in backgroundpicture collectionview \(sectionInfo.numberOfObjects)")
-            return sectionInfo.numberOfObjects
-        } else {
-        return 0
+        
+        guard let sectionsInfo = fetchedController.sections?[section] else {
+            return 0
         }
+        return sectionsInfo.numberOfObjects
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BackgroundPictureCollectionViewCell
+         // Configure the cell
+        configureCell(cell: cell, cellForItemAt: indexPath)
+        return cell
+        
+    }
     
-        // Configure the cell
+    func configureCell(cell:BackgroundPictureCollectionViewCell, cellForItemAt indexPath: IndexPath) {
         
         let backgroundPicture = fetchedController.object(at: indexPath)
         
         if let backgroundPictureData = backgroundPicture.picture {
-            let backgroundPictureImage = UIImage(data: backgroundPictureData as Data)
+            let backgroundPictureImage = backgroundPicture.convertNSDataToUIImage(from: backgroundPictureData)
             cell.backgroundPicture.image = backgroundPictureImage
         }
-        return cell
     }
 
     // MARK: UICollectionViewDelegate
@@ -138,5 +149,39 @@ class BackGroundPicturesCollectionViewController: UICollectionViewController, NS
     
     }
     */
-
+    
+    var blockOperations = [BlockOperation]()
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            // use block operations for multiple inserts
+            blockOperations.append(BlockOperation(block: {
+                self.collectionView?.insertItems(at: [newIndexPath!])
+            }))
+            
+        case .delete:
+            // use block operations for multiple deletes
+            blockOperations.append(BlockOperation(block: {
+                self.collectionView?.deleteItems(at: [indexPath!])
+            }))
+            
+        case .update:
+            let cell = collectionView?.cellForItem(at: indexPath!) as! BackgroundPictureCollectionViewCell
+            configureCell(cell: cell, cellForItemAt: indexPath!)
+        case .move:
+            collectionView?.deleteItems(at: [indexPath!])
+            collectionView?.insertItems(at: [newIndexPath!])
+        }
+    }
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        collectionView?.performBatchUpdates({
+            // start the operations logged in blockoperation
+            for operation in blockOperations {
+                operation.start()
+            }
+        }) { (completed) in
+            self.blockOperations = []
+        }
+    }
 }
