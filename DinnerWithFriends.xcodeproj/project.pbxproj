@@ -53,7 +53,7 @@
 		C972DF22201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDatabaseChangesForCloudKitOperation.swift; sourceTree = "<group>"; };
 		C972DF24201C664100ED97BF /* FetchRecordZoneChangesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecordZoneChangesOperation.swift; sourceTree = "<group>"; };
 		C972DF27201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UpdatePublicDatabaseCoreData.swift; path = Operations/CoreDataOperations/UpdatePublicDatabaseCoreData.swift; sourceTree = "<group>"; };
-		C9745B94201E0CF000C34A97 /* CoreDataPRotocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CoreDataPRotocols.swift; path = DinnerWithFriends/Protocols/CoreDataPRotocols.swift; sourceTree = "<group>"; };
+		C9745B94201E0CF000C34A97 /* CoreDataPRotocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPRotocols.swift; sourceTree = "<group>"; };
 		C9745B9C201E1F6200C34A97 /* BackgroundPictures+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackgroundPictures+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C97AC58A20185290005AD3D5 /* FetchAllSubscriptionsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchAllSubscriptionsOperation.swift; path = "Operations/New Group/FetchAllSubscriptionsOperation.swift"; sourceTree = SOURCE_ROOT; };
 		C97AC58D20185537005AD3D5 /* ProcessServerSubscriptionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProcessServerSubscriptionOperation.swift; path = Operations/SubscriptionsOperations/ProcessServerSubscriptionOperation.swift; sourceTree = SOURCE_ROOT; };
@@ -148,10 +148,19 @@
 			path = RecordZonesOperation;
 			sourceTree = "<group>";
 		};
-		CC7729A820131E1800BDBD13 = {
+		C9A9D9F3202B171F000D57CB /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				C9745B94201E0CF000C34A97 /* CoreDataPRotocols.swift */,
+			);
+			name = Protocols;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		CC7729A820131E1800BDBD13 = {
+			isa = PBXGroup;
+			children = (
+				C9A9D9F3202B171F000D57CB /* Protocols */,
 				C972DF27201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift */,
 				CC7729FB20162F9B00BDBD13 /* Enums */,
 				CC7729F12014969D00BDBD13 /* CoreData */,
