@@ -120,13 +120,6 @@
 			path = CoreDataOperations;
 			sourceTree = "<group>";
 		};
-		C9745B91201E0C1C00C34A97 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		C97AC58C201854E1005AD3D5 /* SubscriptionsOperations */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,7 +183,6 @@
 				CC7729CD201325D300BDBD13 /* Main.storyboard */,
 				CC7729BE20131E1800BDBD13 /* Assets.xcassets */,
 				C972DF1F201B30AD00ED97BF /* AppDelegate.swift */,
-				C9745B91201E0C1C00C34A97 /* Protocols */,
 				CC7729C020131E1800BDBD13 /* LaunchScreen.storyboard */,
 				CC7729C320131E1800BDBD13 /* Info.plist */,
 			);
