@@ -81,7 +81,7 @@ class FetchRecordZoneChangesOperation: CKFetchRecordZoneChangesOperation {
                 
             }
             if error != nil {
-                print ("error in fetch record zone changes completion block: \(error)")
+                print ("error in fetch record zone changes completion block)")
             }
         }
     }
