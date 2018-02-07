@@ -14,7 +14,6 @@ import UIKit
 
 @objc(BackgroundPictures)
 public class BackgroundPictures: NSManagedObject, CloudKitManagedObject {
-    var lastUpdated: NSDate?
     
     var recordType: String { return PublicDatabaseTypes.backgroundPicture.rawValue}
     
@@ -24,7 +23,7 @@ public class BackgroundPictures: NSManagedObject, CloudKitManagedObject {
     
     func updateWithRecord(record: CKRecord) {
         self.pictureName = record["name"] as? String
-        self.lastUpdated = record["lastUpdate"] as? NSDate
+        self.modifiedAt = record["modifiedAt"] as? NSDate
         self.recordName = record.recordID.recordName
         self.recordID = NSKeyedArchiver.archivedData(withRootObject: record.recordID) as NSData
         if let asset = record.object(forKey: "picture") as? CKAsset,

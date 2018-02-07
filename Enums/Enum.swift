@@ -12,13 +12,14 @@ import CloudKit
 enum CloudKitZone: String {
     case dinnerItemsZone = "dinnerItemsZone"
     case backgroundPictureZone = "backgroundPictureZone"
+    
     init?(recordType: String) {
         switch recordType {
         case ModelObjectType.dinnerItems.rawValue:
             self = .dinnerItemsZone
         case ModelObjectType.backgroundPictures.rawValue:
             self = .backgroundPictureZone
-        default: break
+        default : return nil
         }
     }
     

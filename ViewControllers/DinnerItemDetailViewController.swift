@@ -255,8 +255,8 @@ extension DinnerItemDetailViewController :SFSafariViewControllerDelegate, UIImag
         if newItem {
             // create new dinnerItemObject
             let dinnerItem = DinnerItems(context: coreDataStack.managedContext)
-            dinnerItem.addedDate = NSDate()
-            dinnerItem.lastUpdate = NSDate()
+            dinnerItem.createdAt = NSDate()
+            dinnerItem.modifiedAt = NSDate()
             let name = nameLabel.text ?? nil
             dinnerItem.name = name
             let notes = notesLabel.text ?? nil

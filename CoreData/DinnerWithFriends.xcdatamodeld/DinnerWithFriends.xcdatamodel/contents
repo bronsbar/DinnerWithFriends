@@ -4,9 +4,9 @@
         <attribute name="ckChangeTag" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckDatabase" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ckZone" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="metaData" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="modified" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="modifiedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="pictureName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
