@@ -10,7 +10,7 @@ import Foundation
 import CloudKit
 
 protocol CloudKitRecordIDObject {
-    var recordID: Data? {get set}
+    var recordID: NSData? {get set}
 }
 
 extension CloudKitRecordIDObject {
@@ -19,12 +19,12 @@ extension CloudKitRecordIDObject {
         guard let recordID = recordID else {
             return nil
         }
-        return NSKeyedUnarchiver.unarchiveObject(with: recordID) as? CKRecordID
+        return NSKeyedUnarchiver.unarchiveObject(with: recordID as Data) as? CKRecordID
     }
 }
 
 protocol CloudKitManagedObject: CloudKitRecordIDObject {
-    var lastUpdated : NSDate? {get set}
+    var modifiedAt : NSDate? {get set}
     var recordName :String? {get set}
     var recordType : String {get}
 //    func managedObjectToRecord(record: CKRecord?) -> CKRecord
@@ -68,5 +68,10 @@ extension CloudKitManagedObject {
         return record
         
     }
-    
+}
+
+protocol RootManagedObject {
+    var name: String? {get set}
+    var createdAt : NSDate? {get set}
+    var modifiedAt : NSDate? {get set}
 }

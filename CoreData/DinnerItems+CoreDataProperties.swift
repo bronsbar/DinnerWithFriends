@@ -2,7 +2,7 @@
 //  DinnerItems+CoreDataProperties.swift
 //  DinnerWithFriends
 //
-//  Created by Bart Bronselaer on 21/01/18.
+//  Created by Bart Bronselaer on 7/02/18.
 //  Copyright © 2018 Bart Bronselaer. All rights reserved.
 //
 //
@@ -17,11 +17,11 @@ extension DinnerItems {
         return NSFetchRequest<DinnerItems>(entityName: "DinnerItems")
     }
 
-    @NSManaged public var addedDate: NSDate?
+    @NSManaged public var createdAt: NSDate?
     @NSManaged public var category: String?
     @NSManaged public var image: NSData?
     @NSManaged public var imageTumbnail: NSData?
-    @NSManaged public var lastUpdate: NSDate?
+    @NSManaged public var modifiedAt: NSDate?
     @NSManaged public var metaData: NSData?
     @NSManaged public var name: String?
     @NSManaged public var notes: String?

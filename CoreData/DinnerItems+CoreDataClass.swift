@@ -14,7 +14,44 @@ import CoreData
 import CloudKit
 
 @objc(DinnerItems)
-final public class DinnerItems: NSManagedObject {
+final public class DinnerItems: NSManagedObject, RootManagedObject, CloudKitManagedObject {
+    var lastUpdate: NSDate?
+    
+    
+    var recordType : String { return ModelObjectType.dinnerItems.rawValue}
+    
+    // func to comply with CloudKitMagnagedObject Protocol
+    func managedObjectToRecord(record: CKRecord?) -> CKRecord {
+        guard let name = name, let createdAt = createdAt, let modifiedAt = modifiedAt else {
+            fatalError("Required Properties for record not set")
+        }
+        let dinnerItemRecord = cloudKitRecord(record: record)
+        recordName = dinnerItemRecord.recordID.recordName
+        recordID = NSKeyedArchiver.archivedData(withRootObject: dinnerItemRecord.recordID) as NSData
+        dinnerItemRecord["name"] = name as NSString
+        dinnerItemRecord["createdAt"] = createdAt
+        dinnerItemRecord["modifiedAt"] = modifiedAt
+        
+        return dinnerItemRecord
+    }
+    // func to comply with CloudKitMagnagedObject Protocol
+    func updateWithRecord(record: CKRecord) {
+        self.name = record["name"] as? String
+        self.modifiedAt = record["modifiedAt"] as? NSDate
+        self.createdAt = record["createdAt"] as? NSDate
+        self.recordName = record.recordID.recordName
+        self.recordID = NSKeyedArchiver.archivedData(withRootObject: record.recordID) as NSData
+        if let asset = record.object(forKey: "image") as? CKAsset,
+            let data = NSData(contentsOf: asset.fileURL) {
+            self.image = data
+        }
+        self.category = record["category"] as? String
+        self.notes = record["notes"] as? String
+        self.rating = record["rating"] as! Int64
+        
+        
+    }
+    
     
     // enum with dinnerItem Categories
     enum DinnerItemCategory: String {
@@ -72,16 +109,7 @@ final public class DinnerItems: NSManagedObject {
         return imageData
     }
     
-func updateWithRecord(record: CKRecord) {
-    self.name = record["name"] as? String
-    self.lastUpdate = record["lastUpdate"] as? NSDate
-    self.recordName = record.recordID.recordName
-    self.recordID = NSKeyedArchiver.archivedData(withRootObject: record.recordID) as NSData
-    if let asset = record.object(forKey: "image") as? CKAsset,
-        let data = NSData(contentsOf: asset.fileURL) {
-        self.image = data
-    }
-}
+
 }
 
 // extension on CKRecord to convert a property of type CKAsset into a UIImage
