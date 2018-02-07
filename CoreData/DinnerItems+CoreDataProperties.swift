@@ -17,16 +17,16 @@ extension DinnerItems {
         return NSFetchRequest<DinnerItems>(entityName: "DinnerItems")
     }
 
-    @NSManaged public var createdAt: NSDate?
     @NSManaged public var category: String?
+    @NSManaged public var createdAt: NSDate?
     @NSManaged public var image: NSData?
     @NSManaged public var imageTumbnail: NSData?
-    @NSManaged public var modifiedAt: NSDate?
     @NSManaged public var metaData: NSData?
+    @NSManaged public var modifiedAt: NSDate?
     @NSManaged public var name: String?
     @NSManaged public var notes: String?
     @NSManaged public var privateUse: Bool
-    @NSManaged public var rating: Int16
+    @NSManaged public var rating: Int64
     @NSManaged public var recordID: NSData?
     @NSManaged public var recordName: String?
     @NSManaged public var url: URL?

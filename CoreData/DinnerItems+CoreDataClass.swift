@@ -31,6 +31,12 @@ final public class DinnerItems: NSManagedObject, RootManagedObject, CloudKitMana
         dinnerItemRecord["name"] = name as NSString
         dinnerItemRecord["createdAt"] = createdAt
         dinnerItemRecord["modifiedAt"] = modifiedAt
+        if let category = category {
+            dinnerItemRecord["category"] = category as NSString
+        }
+        if let notes = notes {
+            dinnerItemRecord["notes"] = notes as NSString
+        }
         
         return dinnerItemRecord
     }
@@ -59,9 +65,7 @@ final public class DinnerItems: NSManagedObject, RootManagedObject, CloudKitMana
         case Main = "Main Course"
         case Dessert = "Dessert"
         case Apperitive = "Apperitive"
-        case White = "White Wine"
-        case Red = "Red Wine"
-        case Amuse = "Amuse"
+        case Wine = "Wine"
         
     }
     // fetch the dinnerItems in Core Data
