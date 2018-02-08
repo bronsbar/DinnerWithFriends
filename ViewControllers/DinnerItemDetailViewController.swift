@@ -20,7 +20,6 @@ class DinnerItemDetailViewController: UIViewController {
     var dinnerItemDetail : DinnerItems? // will be set when a dinnerItem is passed from the dinnerItem list
     
     var coreDataStack : CoreDataStack!
-    
     var categories = [ "dinnerItemIcon", "wineIcon", "dessertsIcon"]
     var categorySelected : String = "" {
         didSet {
