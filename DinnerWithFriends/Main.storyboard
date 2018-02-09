@@ -386,13 +386,13 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="5Zx-Zy-zWR">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="liT-7Y-I2p" kind="unwind" unwindAction="unwindFromDinnerItemDetailCancelWithSegue:" id="Iuz-1w-NEC"/>
+                                <action selector="cancelButtonWasTapped:" destination="41i-NK-yiy" id="NkL-oI-yPt"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="save" id="62z-Ji-Hxm">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="liT-7Y-I2p" kind="unwind" identifier="saveDinnerItemSegue" unwindAction="unwindFromDinnerItemDetailWithSegue:" id="hOn-WP-MYS"/>
+                                <action selector="saveButtonWasTapped:" destination="41i-NK-yiy" id="Moc-ID-S2W"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -412,7 +412,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PzO-KZ-iJt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="liT-7Y-I2p" userLabel="Exit" sceneMemberID="exit"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="Yp7-r4-ouo">
                     <connections>
                         <action selector="panImage:" destination="41i-NK-yiy" id="ZJg-zr-yFL"/>

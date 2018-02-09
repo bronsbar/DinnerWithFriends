@@ -24,14 +24,10 @@ class DinnerItemTableViewController: UITableViewController {
         return fetchedResultsController
     }()
     
-    
-    
-    
     var dinnerItems: [DinnerItem] = []
     var coreDinnerItems: [DinnerItems] = []
     var itemSelected = ""
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -129,38 +125,36 @@ class DinnerItemTableViewController: UITableViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as? UINavigationController
-        let dinnerItemDetailVC = destinationVC?.topViewController as? DinnerItemDetailViewController
         
-        // propagate the managedContext
-        dinnerItemDetailVC?.coreDataStack = coreDataStack
-        
-        if segue.identifier == "addDinnerItemSegue" {
-            // setup if new item added
-            dinnerItemDetailVC?.newItem = true
-        }
+        // segue to edit the dinnerItemDetail
         if segue.identifier == "editDinnerItemSegue" {
-            if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                let dinnerItem = fetchedResultsController.object(at: selectedIndexPath)
-                dinnerItemDetailVC?.dinnerItemDetail = dinnerItem
-                
-            } else {
-                dinnerItemDetailVC?.dinnerItemDetail = nil
-            }
             
+            guard let destinationNavigationController = segue.destination as? UINavigationController, let dinnerItemViewController = destinationNavigationController.topViewController as? DinnerItemDetailViewController, let indexPath = tableView.indexPathForSelectedRow else {
+                fatalError("Application StoryBoard mis-configuration")}
+                
+            let dinnerItem = fetchedResultsController.object(at: indexPath)
+            
+            let childContext =  NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+            childContext.parent = coreDataStack.managedContext
+            let childEntry = childContext.object(with: dinnerItem.objectID) as? DinnerItems
+            
+            dinnerItemViewController.dinnerItemDetail = childEntry
+            dinnerItemViewController.context = childContext
+            dinnerItemViewController.delegate = self
         }
-    }
-    
-    @IBAction func unwindFromDinnerItemDetail(segue:UIStoryboardSegue) {
-//        do {
-//            try fetchedResultsController.performFetch()
-//
-//        } catch let error as NSError {
-//            print ("Fetching error: \(error), \(error.userInfo)")
-//        }
-    }
-    @IBAction func unwindFromDinnerItemDetailCancel(segue:UIStoryboardSegue) {
-        
+        // segue to add a DinnerItem
+        if segue.identifier == "addDinnerItemSegue" {
+            
+            guard let destinationNavigationController = segue.destination as? UINavigationController, let dinnerItemViewController = destinationNavigationController.topViewController as? DinnerItemDetailViewController else {
+                fatalError("Application StoryBoard mis-configuration")}
+            
+            let childContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+            childContext.parent = coreDataStack.managedContext
+            let newDinnerItem = DinnerItems(context: childContext)
+            dinnerItemViewController.dinnerItemDetail = newDinnerItem
+            dinnerItemViewController.context = newDinnerItem.managedObjectContext
+            dinnerItemViewController.delegate = self
+        }
     }
 }
     
@@ -184,6 +178,30 @@ extension DinnerItemTableViewController {
         }
     }
 }
+
+extension DinnerItemTableViewController: DinnerItemDetailEntryDelegate {
+    
+    func didFinish(viewcontroller: DinnerItemDetailViewController, didSave: Bool) {
+        guard didSave, let context = viewcontroller.context, context.hasChanges else {
+            dismiss(animated: true, completion: {
+                print("did not change anything in detailviewcontroller")
+            })
+            return
+        }
+        context.perform {
+            do {
+                try context.save()
+            } catch let error as NSError {
+                fatalError("Error: \(error.localizedDescription)")
+            }
+            self.coreDataStack.saveContext()
+        }
+        dismiss(animated: true) {
+            print ("context saved succesfully")
+        }
+    }
+}
+    
 
 // MARK: -NSFetchedResultsControllerDelegate
 

@@ -53,7 +53,10 @@ final public class DinnerItems: NSManagedObject, RootManagedObject, CloudKitMana
         }
         self.category = record["category"] as? String
         self.notes = record["notes"] as? String
-        self.rating = record["rating"] as! Int64
+        if let rating = record["rating"] {
+            self.rating = rating as! Int64
+        }
+        
         
         
     }

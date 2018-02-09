@@ -11,6 +11,12 @@ import SafariServices
 import CoreGraphics
 import CoreData
 
+
+protocol DinnerItemDetailEntryDelegate {
+    func didFinish (viewcontroller : DinnerItemDetailViewController, didSave: Bool)
+}
+
+
 class DinnerItemDetailViewController: UIViewController {
     
     
@@ -28,20 +34,19 @@ class DinnerItemDetailViewController: UIViewController {
             self.updateCategorySelection(with: image)
         }
     }
+    // properties to be set when segued from DinnerItemTableViewController
+    var context : NSManagedObjectContext!
+    var delegate : DinnerItemDetailEntryDelegate?
     
     // MARK: -Outlets
     
     @IBOutlet weak var wrapperViewCategoryBar: UIView!
-    
     
     @IBOutlet var categoryBarEdgeContstraint: NSLayoutConstraint!
     
     var wrapperViewZeroHeightConstraint : NSLayoutConstraint!
     
     @IBOutlet weak var categoryBarCollectionView: DinnerDetailCategoryCollectionView!
-    
-    
-    
     
     @IBOutlet weak var selectedCategoryImage: UIImageView! {
         didSet {
@@ -58,12 +63,25 @@ class DinnerItemDetailViewController: UIViewController {
     }
     @IBOutlet weak var imageContainer: UIView!
     // add a dropshadow to the imageContainer
+   
+    
+    // MARK : IBActions
     
     @IBAction func categoryImageTapped(_ sender: Any) {
         print("categoryimage tapped")
         animateCategoryMenuBar()
     }
     
+    @IBAction func saveButtonWasTapped(_ sender: UIBarButtonItem) {
+        updateDinnerItem()
+        delegate?.didFinish(viewcontroller: self, didSave: true)
+    }
+    
+    @IBAction func cancelButtonWasTapped(_ sender: UIBarButtonItem) {
+        delegate?.didFinish(viewcontroller: self, didSave: false)
+    }
+    
+  
     override func viewDidLayoutSubviews() {
         super .viewDidLayoutSubviews()
         let shadowPath = UIBezierPath(rect: imageContainer.layer.bounds)
@@ -73,7 +91,6 @@ class DinnerItemDetailViewController: UIViewController {
         imageContainer.layer.shadowRadius = 3
         imageContainer.layer.shadowOffset = CGSize(width: 0.0, height: -3.0)
         imageContainer.layer.shadowPath = shadowPath.cgPath
-        
         
     }
     
@@ -133,8 +150,6 @@ class DinnerItemDetailViewController: UIViewController {
         
     }
     
-    
-    
     // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,18 +169,6 @@ class DinnerItemDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "saveDinnerItemSegue" {
-            addDinnerItem()
-        }
-    }
-
 }
 
 extension DinnerItemDetailViewController :SFSafariViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -187,9 +190,7 @@ extension DinnerItemDetailViewController :SFSafariViewControllerDelegate, UIImag
         if let urlAvailable = dinnerItem.url {
             urlLabel.text = String(describing: urlAvailable)
         }
-//        if let ratingAvailable = dinnerItem.rating {
-//            ratingLabel.text = String(ratingAvailable)
-//        }
+        ratingLabel.text = String(dinnerItem.rating)
         if let notesAvailable = dinnerItem.notes {
             notesLabel.text = notesAvailable
         }
@@ -250,40 +251,25 @@ extension DinnerItemDetailViewController :SFSafariViewControllerDelegate, UIImag
         }
     }
     
-    private func addDinnerItem() {
-        if newItem {
-            // create new dinnerItemObject
-            let dinnerItem = DinnerItems(context: coreDataStack.managedContext)
-            dinnerItem.createdAt = NSDate()
-            dinnerItem.modifiedAt = NSDate()
+    private func updateDinnerItem() {
+        guard let dinnerItemDetail = dinnerItemDetail else {return}
+        
+            dinnerItemDetail.createdAt = NSDate()
+            dinnerItemDetail.modifiedAt = NSDate()
             let name = nameLabel.text ?? nil
-            dinnerItem.name = name
+            dinnerItemDetail.name = name
             let notes = notesLabel.text ?? nil
-            dinnerItem.notes = notes
+            dinnerItemDetail.notes = notes
             if let image = image {
-                dinnerItem.image = dinnerItem.convertUIImageToNSData(from: image.image)
+                dinnerItemDetail.image = dinnerItemDetail.convertUIImageToNSData(from: image.image)
             }
-            dinnerItem.category = categorySelected
-            
-            coreDataStack.saveContext()
-        } else {
-            // update existing dinnerItemDetail
-            if let dinnerItem = dinnerItemDetail {
-                dinnerItem.lastUpdate = NSDate()
-                let name = nameLabel.text ?? nil
-                dinnerItem.name = name
-                let notes = notesLabel.text ?? nil
-                dinnerItem.notes = notes
-                if let image = image {
-                    dinnerItem.image = dinnerItem.convertUIImageToNSData(from: image.image)
-                }
-                dinnerItem.category = categorySelected
-                
-                coreDataStack.saveContext()
-            }
+            dinnerItemDetail.category = categorySelected
+        if let rating = ratingLabel.text {
+            dinnerItemDetail.rating = Int64(rating)!
         }
-
-        }
+        
+     }
+    
     // update Category selection with animation
     private func updateCategorySelection(with image: UIImage?) {
         self.selectedCategoryImage.tintColor = UIColor.darkGray
