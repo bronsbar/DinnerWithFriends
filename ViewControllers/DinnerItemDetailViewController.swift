@@ -36,6 +36,8 @@ class DinnerItemDetailViewController: UIViewController {
     }
     // properties to be set when segued from DinnerItemTableViewController
     var context : NSManagedObjectContext!
+    
+    // delegate can be any type that implements the DinnerItemDetailEntryDelegate protocol
     var delegate : DinnerItemDetailEntryDelegate?
     
     // MARK: -Outlets
