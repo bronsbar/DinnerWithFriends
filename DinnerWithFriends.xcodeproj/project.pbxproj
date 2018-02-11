@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C960AAD0203010D8002AE45A /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960AACF203010D8002AE45A /* Protocols.swift */; };
 		C96D1D3020221897004CD179 /* BackgroundPictureQueryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96D1D2F20221897004CD179 /* BackgroundPictureQueryOperation.swift */; };
 		C972DF20201B30AD00ED97BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF1F201B30AD00ED97BF /* AppDelegate.swift */; };
 		C972DF23201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF22201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C960AACF203010D8002AE45A /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		C96D1D2F20221897004CD179 /* BackgroundPictureQueryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundPictureQueryOperation.swift; sourceTree = "<group>"; };
 		C972DF1F201B30AD00ED97BF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C972DF22201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDatabaseChangesForCloudKitOperation.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			children = (
 				C9A9D9F3202B171F000D57CB /* Protocols */,
 				C972DF27201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift */,
+				C960AACF203010D8002AE45A /* Protocols.swift */,
 				CC7729FB20162F9B00BDBD13 /* Enums */,
 				CC7729F12014969D00BDBD13 /* CoreData */,
 				CC7729F22014972100BDBD13 /* ViewCells and Views */,
@@ -369,6 +372,7 @@
 				C972DF20201B30AD00ED97BF /* AppDelegate.swift in Sources */,
 				CC7729D5201491E400BDBD13 /* MenuBarCollectionViewCell.swift in Sources */,
 				CC7729EF2014966500BDBD13 /* Dinners+CoreDataClass.swift in Sources */,
+				C960AAD0203010D8002AE45A /* Protocols.swift in Sources */,
 				C97AC5912018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift in Sources */,
 				C972DF25201C664100ED97BF /* FetchRecordZoneChangesOperation.swift in Sources */,
 				C972DF28201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift in Sources */,

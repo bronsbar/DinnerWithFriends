@@ -151,6 +151,7 @@ class DinnerItemTableViewController: UITableViewController {
             let childContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
             childContext.parent = coreDataStack.managedContext
             let newDinnerItem = DinnerItems(context: childContext)
+            newDinnerItem.createdAt = NSDate()
             dinnerItemViewController.dinnerItemDetail = newDinnerItem
             dinnerItemViewController.context = newDinnerItem.managedObjectContext
             dinnerItemViewController.delegate = self

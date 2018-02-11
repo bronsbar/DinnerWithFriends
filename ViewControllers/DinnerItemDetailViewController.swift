@@ -21,10 +21,8 @@ class DinnerItemDetailViewController: UIViewController {
     
     
     // MARK: -Properties
-    
-    var newItem : Bool = false // is set true by when + is selected in the dinnerItemList
+
     var dinnerItemDetail : DinnerItems? // will be set when a dinnerItem is passed from the dinnerItem list
-    
     var coreDataStack : CoreDataStack!
     var categories = [ "dinnerItemIcon", "wineIcon", "dessertsIcon"]
     var categorySelected : String = "" {
@@ -256,7 +254,6 @@ extension DinnerItemDetailViewController :SFSafariViewControllerDelegate, UIImag
     private func updateDinnerItem() {
         guard let dinnerItemDetail = dinnerItemDetail else {return}
         
-            dinnerItemDetail.createdAt = NSDate()
             dinnerItemDetail.modifiedAt = NSDate()
             let name = nameLabel.text ?? nil
             dinnerItemDetail.name = name

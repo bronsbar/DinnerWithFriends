@@ -14,7 +14,10 @@ import CoreData
 import CloudKit
 
 @objc(DinnerItems)
-final public class DinnerItems: NSManagedObject, RootManagedObject, CloudKitManagedObject {
+final public class DinnerItems: NSManagedObject, RootManagedObject, CloudKitManagedObject, ImageFile {
+   
+    
+    
     var lastUpdate: NSDate?
     
     
@@ -57,8 +60,31 @@ final public class DinnerItems: NSManagedObject, RootManagedObject, CloudKitMana
             self.rating = rating as! Int64
         }
         
+    }
+    // func to compl with the ImageFile protocol
+    
+    func saveImageToDisk(image: UIImage, imageName:String) -> URL? {
+        if let data = UIImagePNGRepresentation(image) {
         
-        
+            let filename = getDocumentsDirectory().appendingPathComponent(imageName)
+            do {
+                try data.write(to: filename)
+                return filename
+            } catch {
+                print ("Error in writing UIImage to file")
+                return nil
+            }
+        }
+    }
+    
+    func retrieveImageFromDisk(withUrl: URL) -> UIImage? {
+        do {
+            let imageData = try Data(contentsOf: withUrl)
+            return UIImage(data: imageData)
+        } catch {
+            print ("error loading image from file")
+        }
+        return nil
     }
     
     
