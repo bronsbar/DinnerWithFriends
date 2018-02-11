@@ -20,7 +20,6 @@
 		C97AC5912018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC5902018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift */; };
 		C97AC5932018E271005AD3D5 /* ProcessServerPublicDatabaseSubscriptionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97AC5922018E271005AD3D5 /* ProcessServerPublicDatabaseSubscriptionOperation.swift */; };
 		C9B226AB2017690900B65052 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B226AA2017690900B65052 /* CloudKitManager.swift */; };
-		C9BB88C1202B770100DD1064 /* DinnerItems+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BB88C0202B770100DD1064 /* DinnerItems+CoreDataProperties.swift */; };
 		CC23A209201F659200F275CD /* BackGroundPicturesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC23A208201F659200F275CD /* BackGroundPicturesCollectionViewController.swift */; };
 		CC23A20B2023469500F275CD /* BackgroundPictureCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC23A20A2023469500F275CD /* BackgroundPictureCollectionViewCell.swift */; };
 		CC7729BD20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC7729BB20131E1800BDBD13 /* DinnerWithFriends.xcdatamodeld */; };
@@ -62,7 +61,6 @@
 		C97AC5902018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchAllPublicDatabaseSubscriptionsOperation.swift; path = Operations/SubscriptionsOperations/FetchAllPublicDatabaseSubscriptionsOperation.swift; sourceTree = SOURCE_ROOT; };
 		C97AC5922018E271005AD3D5 /* ProcessServerPublicDatabaseSubscriptionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProcessServerPublicDatabaseSubscriptionOperation.swift; path = Operations/SubscriptionsOperations/ProcessServerPublicDatabaseSubscriptionOperation.swift; sourceTree = SOURCE_ROOT; };
 		C9B226AA2017690900B65052 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
-		C9BB88C0202B770100DD1064 /* DinnerItems+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DinnerItems+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CC23A208201F659200F275CD /* BackGroundPicturesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundPicturesCollectionViewController.swift; sourceTree = "<group>"; };
 		CC23A20A2023469500F275CD /* BackgroundPictureCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundPictureCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC7729B120131E1800BDBD13 /* DinnerWithFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DinnerWithFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,7 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				CC7729E72014966500BDBD13 /* DinnerItems+CoreDataClass.swift */,
-				C9BB88C0202B770100DD1064 /* DinnerItems+CoreDataProperties.swift */,
 				CC7729E92014966500BDBD13 /* Dinners+CoreDataClass.swift */,
 				CC7729EA2014966500BDBD13 /* Dinners+CoreDataProperties.swift */,
 				CC7729E52014966500BDBD13 /* BackgroundPictures+CoreDataClass.swift */,
@@ -368,7 +365,6 @@
 				CC7729DF2014922200BDBD13 /* DinnerItemTableViewCell.swift in Sources */,
 				CC7729E02014922200BDBD13 /* DinnerItemTableViewController.swift in Sources */,
 				CC7729D4201491E400BDBD13 /* DinnerCollectionViewCell.swift in Sources */,
-				C9BB88C1202B770100DD1064 /* DinnerItems+CoreDataProperties.swift in Sources */,
 				C972DF20201B30AD00ED97BF /* AppDelegate.swift in Sources */,
 				CC7729D5201491E400BDBD13 /* MenuBarCollectionViewCell.swift in Sources */,
 				CC7729EF2014966500BDBD13 /* Dinners+CoreDataClass.swift in Sources */,
