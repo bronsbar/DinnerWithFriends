@@ -261,6 +261,9 @@ extension DinnerItemDetailViewController :SFSafariViewControllerDelegate, UIImag
             dinnerItemDetail.notes = notes
             if let image = image {
                 dinnerItemDetail.image = dinnerItemDetail.convertUIImageToNSData(from: image.image)
+                let fileName = dinnerItemDetail.name
+                dinnerItemDetail.imageUrl = dinnerItemDetail.saveImageToDisk(image: image.image!, imageName: fileName!)
+                print("image saved to disk with url: \(String(describing: dinnerItemDetail.imageUrl?.absoluteString))")
             }
             dinnerItemDetail.category = categorySelected
         if let rating = ratingLabel.text {

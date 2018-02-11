@@ -64,17 +64,18 @@ final public class DinnerItems: NSManagedObject, RootManagedObject, CloudKitMana
     // func to compl with the ImageFile protocol
     
     func saveImageToDisk(image: UIImage, imageName:String) -> URL? {
+        var returnUrl : URL?
         if let data = UIImagePNGRepresentation(image) {
-        
             let filename = getDocumentsDirectory().appendingPathComponent(imageName)
             do {
                 try data.write(to: filename)
-                return filename
+                returnUrl = filename
             } catch {
                 print ("Error in writing UIImage to file")
-                return nil
+                returnUrl =  nil
             }
         }
+        return returnUrl
     }
     
     func retrieveImageFromDisk(withUrl: URL) -> UIImage? {
