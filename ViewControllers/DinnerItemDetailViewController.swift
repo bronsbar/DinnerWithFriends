@@ -180,10 +180,13 @@ extension DinnerItemDetailViewController :SFSafariViewControllerDelegate, UIImag
             selectedCategoryImage.image = UIImage(named: category)
             
         }
-        
-        if let dinnerItemImage = dinnerItem.convertNSDataToUIImage(from: dinnerItem.image) {
-            image.image = dinnerItemImage
+        if let dinnerItemImageUrl = dinnerItem.imageUrl {
+            image.image = dinnerItem.retrieveImageFromDisk(withUrl: dinnerItemImageUrl)
         }
+        
+//        if let dinnerItemImage = dinnerItem.convertNSDataToUIImage(from: dinnerItem.image) {
+//            image.image = dinnerItemImage
+//        }
         nameLabel.text = dinnerItem.name
         if let urlAvailable = dinnerItem.url {
             urlLabel.text = String(describing: urlAvailable)

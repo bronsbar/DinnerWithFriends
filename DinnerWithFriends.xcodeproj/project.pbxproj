@@ -147,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				C9745B94201E0CF000C34A97 /* CoreDataPRotocols.swift */,
+				C960AACF203010D8002AE45A /* Protocols.swift */,
 			);
 			name = Protocols;
 			path = "New Group";
@@ -157,7 +158,6 @@
 			children = (
 				C9A9D9F3202B171F000D57CB /* Protocols */,
 				C972DF27201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift */,
-				C960AACF203010D8002AE45A /* Protocols.swift */,
 				CC7729FB20162F9B00BDBD13 /* Enums */,
 				CC7729F12014969D00BDBD13 /* CoreData */,
 				CC7729F22014972100BDBD13 /* ViewCells and Views */,

@@ -30,6 +30,11 @@ class CoreDataStack {
     }()
     
     func saveContext () {
+        
+        let insertedObjects = managedContext.insertedObjects
+        let modifiedObjects = managedContext.updatedObjects
+        let deletedRecordIDs = managedContext.deletedObjects.flatMap { ($0 as? CloudKitManagedObject)?.cloudKitRecordID()}
+        
         guard managedContext.hasChanges else {return}
         do {
             try managedContext.save()
