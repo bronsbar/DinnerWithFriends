@@ -12,9 +12,7 @@ import CoreGraphics
 import CoreData
 
 
-protocol DinnerItemDetailEntryDelegate {
-    func didFinish (viewcontroller : DinnerItemDetailViewController, didSave: Bool)
-}
+
 
 
 class DinnerItemDetailViewController: UIViewController {

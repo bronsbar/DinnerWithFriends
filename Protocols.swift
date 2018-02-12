@@ -9,9 +9,15 @@
 import Foundation
 import UIKit
 
+
+protocol DinnerItemDetailEntryDelegate {
+    func didFinish (viewcontroller : DinnerItemDetailViewController, didSave: Bool)
+}
+
 protocol ImageFile {
     func saveImageToDisk(image: UIImage, imageName:String) -> URL?
     func retrieveImageFromDisk(withUrl :URL) -> UIImage?
+    func deleteImageFile( withUrl: URL?) -> Void
 }
 
 extension ImageFile {

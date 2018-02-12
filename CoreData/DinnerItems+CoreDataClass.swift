@@ -17,7 +17,6 @@ import CloudKit
 final public class DinnerItems: NSManagedObject, RootManagedObject, CloudKitManagedObject, ImageFile {
    
     
-    
     var lastUpdate: NSDate?
     
     
@@ -66,7 +65,9 @@ final public class DinnerItems: NSManagedObject, RootManagedObject, CloudKitMana
     func saveImageToDisk(image: UIImage, imageName:String) -> URL? {
         var returnUrl : URL?
         if let data = UIImagePNGRepresentation(image) {
-            let filename = getDocumentsDirectory().appendingPathComponent(imageName)
+            let uuid = UUID()
+            let newImageName = imageName + "." + uuid.uuidString
+            let filename = getDocumentsDirectory().appendingPathComponent(newImageName)
             do {
                 try data.write(to: filename)
                 returnUrl = filename
@@ -86,6 +87,18 @@ final public class DinnerItems: NSManagedObject, RootManagedObject, CloudKitMana
             print ("error loading image from file")
         }
         return nil
+    }
+    func deleteImageFile(withUrl : URL?) {
+        if let withUrl = withUrl {
+            let fileManager = FileManager.default
+            do {
+                try fileManager.removeItem(at: withUrl)
+                print("imagefile succesfully removed")
+            } catch {
+                print("could not delete imagefile")
+            }
+        }
+        
     }
     
     

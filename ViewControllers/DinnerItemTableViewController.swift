@@ -102,8 +102,11 @@ class DinnerItemTableViewController: UITableViewController {
         
         if editingStyle == .delete {
             let dinnerItemToRemove = fetchedResultsController.object(at: indexPath)
+            let fileUrlToRemove = dinnerItemToRemove.imageUrl
             coreDataStack.managedContext.delete(dinnerItemToRemove)
+            dinnerItemToRemove.deleteImageFile(withUrl: fileUrlToRemove)
             coreDataStack.saveContext()
+            
 //            clearCaches()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
