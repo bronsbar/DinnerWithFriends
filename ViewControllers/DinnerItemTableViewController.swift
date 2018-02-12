@@ -198,10 +198,10 @@ extension DinnerItemTableViewController: DinnerItemDetailEntryDelegate {
             } catch let error as NSError {
                 fatalError("Error: \(error.localizedDescription)")
             }
-            self.coreDataStack.saveContext()
+//            self.coreDataStack.saveContext()
         }
         dismiss(animated: true) {
-            print ("context saved succesfully")
+            print (" child context saved succesfully")
         }
     }
 }
