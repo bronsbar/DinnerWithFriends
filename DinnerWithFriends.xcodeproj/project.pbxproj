@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C960AAD0203010D8002AE45A /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960AACF203010D8002AE45A /* Protocols.swift */; };
 		C960AAD22030190F002AE45A /* DinnerItems+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960AAD12030190F002AE45A /* DinnerItems+CoreDataProperties.swift */; };
+		C960AAD42031EE37002AE45A /* CreateRecordsForNewObjectsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960AAD32031EE37002AE45A /* CreateRecordsForNewObjectsOperation.swift */; };
 		C96D1D3020221897004CD179 /* BackgroundPictureQueryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96D1D2F20221897004CD179 /* BackgroundPictureQueryOperation.swift */; };
 		C972DF20201B30AD00ED97BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF1F201B30AD00ED97BF /* AppDelegate.swift */; };
 		C972DF23201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C972DF22201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift */; };
@@ -51,6 +52,7 @@
 /* Begin PBXFileReference section */
 		C960AACF203010D8002AE45A /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		C960AAD12030190F002AE45A /* DinnerItems+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DinnerItems+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C960AAD32031EE37002AE45A /* CreateRecordsForNewObjectsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateRecordsForNewObjectsOperation.swift; path = Operations/CoreDataOperations/CreateRecordsForNewObjectsOperation.swift; sourceTree = SOURCE_ROOT; };
 		C96D1D2F20221897004CD179 /* BackgroundPictureQueryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundPictureQueryOperation.swift; sourceTree = "<group>"; };
 		C972DF1F201B30AD00ED97BF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C972DF22201B7AE300ED97BF /* FetchDatabaseChangesForCloudKitOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDatabaseChangesForCloudKitOperation.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		C972DF26201C80D500ED97BF /* CoreDataOperations */ = {
 			isa = PBXGroup;
 			children = (
+				C960AAD32031EE37002AE45A /* CreateRecordsForNewObjectsOperation.swift */,
 			);
 			path = CoreDataOperations;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				C97AC5912018DFFA005AD3D5 /* FetchAllPublicDatabaseSubscriptionsOperation.swift in Sources */,
 				C972DF25201C664100ED97BF /* FetchRecordZoneChangesOperation.swift in Sources */,
 				C972DF28201C810F00ED97BF /* UpdatePublicDatabaseCoreData.swift in Sources */,
+				C960AAD42031EE37002AE45A /* CreateRecordsForNewObjectsOperation.swift in Sources */,
 				CC7729DA2014920800BDBD13 /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

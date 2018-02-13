@@ -14,6 +14,10 @@ import UIKit
 
 @objc(BackgroundPictures)
 public class BackgroundPictures: NSManagedObject, CloudKitManagedObject {
+    func managedObjectToRecord(record: CKRecord?) -> CKRecord {
+        return CKRecord(recordType: "BackgroundPicture")
+    }
+    
     
     var recordType: String { return PublicDatabaseTypes.backgroundPicture.rawValue}
     

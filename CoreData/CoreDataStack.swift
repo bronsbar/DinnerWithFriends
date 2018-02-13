@@ -42,4 +42,38 @@ class CoreDataStack {
             print("Unresolved error \(error), \(error.userInfo)")
         }
     }
+    
+    func createBackgroundManagedContext() -> NSManagedObjectContext {
+        let backgroundManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        backgroundManagedObjectContext.persistentStoreCoordinator = storeContainer.persistentStoreCoordinator
+        backgroundManagedObjectContext.undoManager = nil
+        return backgroundManagedObjectContext
+    }
+    
+    func fetchCloudKitManagedObjects(managedObjectContext: NSManagedObjectContext, managedObjectIDs: [NSManagedObjectID]) -> [CloudKitManagedObject] {
+        var cloudKitManagedObjects : [CloudKitManagedObject] = []
+        for managedObjectsID in managedObjectIDs {
+            do {
+                let managedObject = try managedObjectContext.existingObject(with: managedObjectsID)
+                if let cloudKitManagedObject = managedObject as? CloudKitManagedObject {
+                    cloudKitManagedObjects.append(cloudKitManagedObject)
+                }
+                
+            }
+            catch let error as NSError {
+                print ("Error fetching from CoreData: \(error.localizedDescription)")
+            }
+        }
+        return cloudKitManagedObjects
+    }
+    func saveBackgroundManagedObjectContext(backgroundManagedObjectContext: NSManagedObjectContext) {
+        if backgroundManagedObjectContext.hasChanges {
+            do {
+                try backgroundManagedObjectContext.save()
+            } catch let error as NSError {
+                fatalError("CoreDataStack - save backgroundManagedObjectContext Error :  \(error.localizedDescription)")
+            }
+        }
+    }
 }
+

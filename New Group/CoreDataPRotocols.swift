@@ -27,7 +27,7 @@ protocol CloudKitManagedObject: CloudKitRecordIDObject {
     var modifiedAt : NSDate? {get set}
     var recordName :String? {get set}
     var recordType : String {get}
-//    func managedObjectToRecord(record: CKRecord?) -> CKRecord
+    func managedObjectToRecord(record: CKRecord?) -> CKRecord
     func updateWithRecord(record: CKRecord)
 }
 

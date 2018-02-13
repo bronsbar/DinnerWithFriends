@@ -39,6 +39,9 @@ final public class DinnerItems: NSManagedObject, RootManagedObject, CloudKitMana
         if let notes = notes {
             dinnerItemRecord["notes"] = notes as NSString
         }
+        if let imageUrl = imageUrl {
+            dinnerItemRecord["image"] = CKAsset(fileURL: imageUrl)
+        }
         
         return dinnerItemRecord
     }
