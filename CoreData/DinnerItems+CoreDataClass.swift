@@ -73,7 +73,7 @@ final public class DinnerItems: NSManagedObject, RootManagedObject, CloudKitMana
             let filename = getDocumentsDirectory().appendingPathComponent(newImageName)
             do {
                 try data.write(to: filename)
-                returnUrl = filename
+                returnUrl = URL(string: newImageName)
             } catch {
                 print ("Error in writing UIImage to file")
                 returnUrl =  nil
@@ -84,18 +84,20 @@ final public class DinnerItems: NSManagedObject, RootManagedObject, CloudKitMana
     
     func retrieveImageFromDisk(withUrl: URL) -> UIImage? {
         do {
-            let imageData = try Data(contentsOf: withUrl)
+            let fileName = getDocumentsDirectory().appendingPathComponent(withUrl.absoluteString)
+            let imageData = try Data(contentsOf: fileName)
             return UIImage(data: imageData)
-        } catch {
-            print ("error loading image from file")
+        } catch let error as NSError {
+            print ("error loading image from file: \(error.localizedDescription)")
         }
         return nil
     }
     func deleteImageFile(withUrl : URL?) {
         if let withUrl = withUrl {
             let fileManager = FileManager.default
+            let fileName = getDocumentsDirectory().appendingPathComponent(withUrl.absoluteString)
             do {
-                try fileManager.removeItem(at: withUrl)
+                try fileManager.removeItem(at: fileName)
                 print("imagefile succesfully removed")
             } catch {
                 print("could not delete imagefile")
